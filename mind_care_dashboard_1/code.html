@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mind Care Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#cceacf",
+                      "surface-bright": "#fcf9f8",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#615e57",
+                      "on-surface": "#1b1c1c",
+                      "background": "#fcf9f8",
+                      "surface-container-highest": "#e4e2e1",
+                      "surface": "#fcf9f8",
+                      "surface-dim": "#dcd9d9",
+                      "primary-fixed-dim": "#b0ceb4",
+                      "on-secondary-fixed": "#002020",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#f6f3f2",
+                      "on-tertiary-fixed-variant": "#494740",
+                      "surface-variant": "#e4e2e1",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#f0eded",
+                      "on-surface-variant": "#424842",
+                      "surface-container-high": "#eae7e7",
+                      "on-secondary-container": "#496a69",
+                      "secondary-fixed-dim": "#aacdcc",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#303030",
+                      "primary": "#4a654f",
+                      "on-tertiary-fixed": "#1d1c16",
+                      "on-primary-container": "#253f2b",
+                      "tertiary-fixed-dim": "#cac6be",
+                      "tertiary-container": "#a6a29a",
+                      "on-tertiary-container": "#3b3933",
+                      "secondary-fixed": "#c5eae8",
+                      "inverse-primary": "#b0ceb4",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#2b4c4c",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#8daa91",
+                      "on-primary-fixed": "#062010",
+                      "error": "#ba1a1a",
+                      "inverse-on-surface": "#f3f0f0",
+                      "tertiary-fixed": "#e7e2d9",
+                      "outline": "#737972",
+                      "outline-variant": "#c2c8c0",
+                      "surface-tint": "#4a654f",
+                      "secondary": "#436463",
+                      "on-background": "#1b1c1c",
+                      "error-container": "#ffdad6",
+                      "secondary-container": "#c5eae8",
+                      "on-primary-fixed-variant": "#334d38"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max-width": "1200px",
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "margin-mobile": "20px",
+                      "section-gap": "80px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "body-sm": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.04em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen pb-24 font-body-md">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-container shadow-[0_8px_32px_rgba(45,45,45,0.04)]">
+<div class="flex justify-between items-center px-margin-mobile h-16 w-full">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-primary-container/20 transition-colors rounded-full p-2 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="spa">spa</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Mind Care</h1>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-primary-container/20 transition-colors rounded-full p-2 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-margin-mobile flex flex-col gap-6 md:hidden">
+<!-- Greeting -->
+<section>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Welcome back, Sarah</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">How are you feeling today?</p>
+</section>
+<!-- Wellness Check-in Chips -->
+<section class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex-shrink-0 px-4 py-2 bg-tertiary-fixed text-on-tertiary-container rounded-full font-label-md text-label-md hover:bg-primary-container/20 transition-colors">
+                Calm
+            </button>
+<button class="flex-shrink-0 px-4 py-2 bg-tertiary-fixed text-on-tertiary-container rounded-full font-label-md text-label-md hover:bg-primary-container/20 transition-colors">
+                Anxious
+            </button>
+<button class="flex-shrink-0 px-4 py-2 bg-tertiary-fixed text-on-tertiary-container rounded-full font-label-md text-label-md hover:bg-primary-container/20 transition-colors">
+                Tired
+            </button>
+<button class="flex-shrink-0 px-4 py-2 bg-tertiary-fixed text-on-tertiary-container rounded-full font-label-md text-label-md hover:bg-primary-container/20 transition-colors">
+                Focused
+            </button>
+</section>
+<!-- General Wellbeing Assessment Card -->
+<section class="bg-surface-bright rounded-xl p-6 shadow-[0_8px_32px_rgba(45,45,45,0.04)] border border-surface-container-highest">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">General Wellbeing</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Take a quick assessment to track your mood.</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-surface-tint transition-colors">
+                Start Test
+            </button>
+</section>
+<!-- Upcoming Consultation Card -->
+<section class="bg-surface-bright rounded-xl p-6 shadow-[0_8px_32px_rgba(45,45,45,0.04)] border border-surface-container-highest">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-wider">Upcoming Consultation</h3>
+<div class="flex items-center gap-4">
+<img class="w-16 h-16 rounded-full object-cover" data-alt="A professional, warm, and inviting portrait photo of a female therapist, Dr. Ananya Sharma, smiling gently in a well-lit, minimal consultation room with a soft sage green and beige aesthetic. Soft, natural lighting. High quality photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqY4POmUciCm4frH6QmphpnEJ9GA0qRk_syh8yis_b7nApJZPonVeM0D2XDR4GKiafKJGdGRLmYGuyAfreSxSWZ7CqSzb55yc7_gtT-xD_qzNyc1ZSiHXg0lS5Xf7w-OnaJMcrpwKE1aOP1IwZ2OETp7XpM9IpMoUJikyHSd8juYzSEs4dKSDq5Mh9M3dwBHrqKrS-EIBJbnQdC_JrFMudmDfdQGXbb_uKQoTCjZ25axB74z_uC5N6IA"/>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface text-lg">Dr. Ananya Sharma</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Today, 3:00 PM</p>
+</div>
+</div>
+<div class="mt-4 flex gap-3">
+<button class="flex-1 py-2 bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md hover:bg-secondary-fixed transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="video_call">video_call</span> Join
+                </button>
+<button class="flex-1 py-2 border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                    Reschedule
+                </button>
+</div>
+</section>
+<!-- Wellness Progress -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Wellness Progress</h3>
+<div class="bg-surface-bright rounded-xl p-6 shadow-[0_8px_32px_rgba(45,45,45,0.04)] border border-surface-container-highest">
+<div class="flex justify-between items-end h-32 gap-2">
+<!-- Fake Bar Chart -->
+<div class="flex flex-col items-center justify-end w-full gap-2">
+<div class="w-full bg-primary rounded-t-sm" style="height: 40%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mon</span>
+</div>
+<div class="flex flex-col items-center justify-end w-full gap-2">
+<div class="w-full bg-primary rounded-t-sm" style="height: 60%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tue</span>
+</div>
+<div class="flex flex-col items-center justify-end w-full gap-2">
+<div class="w-full bg-primary rounded-t-sm" style="height: 30%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Wed</span>
+</div>
+<div class="flex flex-col items-center justify-end w-full gap-2">
+<div class="w-full bg-primary-container rounded-t-sm" style="height: 80%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Thu</span>
+</div>
+<div class="flex flex-col items-center justify-end w-full gap-2">
+<div class="w-full bg-primary rounded-t-sm" style="height: 50%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Fri</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4">Recent Activity</h3>
+<ul class="space-y-4">
+<li class="flex items-center gap-4 bg-surface-bright p-4 rounded-xl shadow-[0_8px_32px_rgba(45,45,45,0.04)] border border-surface-container-highest">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-medium text-on-surface">Journal Entry Added</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Yesterday, 8:30 PM</p>
+</div>
+</li>
+<li class="flex items-center gap-4 bg-surface-bright p-4 rounded-xl shadow-[0_8px_32px_rgba(45,45,45,0.04)] border border-surface-container-highest">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="self_improvement">self_improvement</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-medium text-on-surface">Completed Meditation</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Yesterday, 8:00 AM</p>
+</div>
+</li>
+</ul>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface dark:bg-surface-container-low shadow-[0_-4px_16px_rgba(45,45,45,0.04)] rounded-t-xl md:hidden">
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+<span class="font-label-sm text-label-sm mt-1">Assessments</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm mt-1">Track</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm mt-1">History</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

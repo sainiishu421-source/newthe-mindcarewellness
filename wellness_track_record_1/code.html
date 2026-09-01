@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mind Care - Track Record</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container": "#f0eded",
+                      "secondary-fixed-dim": "#aacdcc",
+                      "on-tertiary-fixed-variant": "#494740",
+                      "tertiary": "#615e57",
+                      "surface-tint": "#4a654f",
+                      "surface": "#fcf9f8",
+                      "on-surface-variant": "#424842",
+                      "surface-container-highest": "#e4e2e1",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#496a69",
+                      "on-error": "#ffffff",
+                      "inverse-surface": "#303030",
+                      "secondary-container": "#c5eae8",
+                      "surface-container-high": "#eae7e7",
+                      "outline-variant": "#c2c8c0",
+                      "tertiary-fixed-dim": "#cac6be",
+                      "on-secondary-fixed": "#002020",
+                      "on-tertiary-container": "#3b3933",
+                      "on-background": "#1b1c1c",
+                      "on-tertiary-fixed": "#1d1c16",
+                      "tertiary-fixed": "#e7e2d9",
+                      "tertiary-container": "#a6a29a",
+                      "on-primary-fixed-variant": "#334d38",
+                      "background": "#fcf9f8",
+                      "primary": "#4a654f",
+                      "on-primary-fixed": "#062010",
+                      "secondary": "#436463",
+                      "on-primary-container": "#253f2b",
+                      "inverse-primary": "#b0ceb4",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#fcf9f8",
+                      "inverse-on-surface": "#f3f0f0",
+                      "primary-fixed-dim": "#b0ceb4",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#c5eae8",
+                      "primary-fixed": "#cceacf",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e4e2e1",
+                      "surface-dim": "#dcd9d9",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#8daa91",
+                      "outline": "#737972",
+                      "surface-container-low": "#f6f3f2",
+                      "on-secondary-fixed-variant": "#2b4c4c",
+                      "error-container": "#ffdad6",
+                      "on-tertiary": "#ffffff",
+                      "on-surface": "#1b1c1c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "section-gap": "80px",
+                      "container-max-width": "1200px",
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "body-sm": ["Manrope"],
+                      "display": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "body-md": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #FAFAFA; }
+        .ambient-shadow { box-shadow: 0 8px 32px rgba(45, 45, 45, 0.04); }
+        .ambient-shadow-hover:hover { box-shadow: 0 12px 48px rgba(45, 45, 45, 0.08); transform: translateY(-2px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex h-screen overflow-hidden antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col py-8 px-4 h-full bg-surface shadow-sm h-screen w-64 fixed left-0 top-0 z-40 bg-surface-container-low border-r border-surface-container-highest">
+<a class="mb-12 px-4 flex items-center gap-3 hover:opacity-80 transition-opacity" href="{{DATA:SCREEN:SCREEN_5}}">
+<img alt="Mind Care Logo" class="w-10 h-10 rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVO-aE9_a21aEW4sT-sPoi1rQ19hYVxT8BrkpBeuifi9bW-wyqKP0SMdApTB7AJ0UhF6SyCPlAHskvy_GYTdW2FGETXlEPbGvmlIhtce8XiXMC5aNJGMTu_WDkCEs5CDkGWauTYO8HIj9BnQPlMgWxh2qN133FvYMNVIRoxOj-gR8LXgqwGzgKqqmknR7tN-UsEhuR6_qimFLUJUX3rg5jmOzRaMKb5NuhA1vGVe36TlInLQR5wOXxwg"/>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Mind Care</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Digital Sanctuary</p>
+</div>
+</a>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-secondary-container/50 transition-colors duration-300 ease-in-out font-body-md text-body-md" href="{{DATA:SCREEN:SCREEN_5}}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-secondary-container/50 transition-colors duration-300 ease-in-out font-body-md text-body-md" href="{{DATA:SCREEN:SCREEN_6}}">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+                    Assessments
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-secondary-container/20 transition-all duration-300 ease-in-out font-body-md text-body-md" href="{{DATA:SCREEN:SCREEN_2}}">
+<span class="material-symbols-outlined" data-icon="insights" style="font-variation-settings: 'FILL' 1;">insights</span>
+                    Track Record
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-secondary-container/50 transition-colors duration-300 ease-in-out font-body-md text-body-md" href="{{DATA:SCREEN:SCREEN_4}}">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                    Consultations
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-secondary-container/50 transition-colors duration-300 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                    My History
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-secondary-container/50 transition-colors duration-300 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                    Profile
+                </a>
+</li>
+</ul>
+<div class="mt-auto px-4">
+<a class="block text-center w-full py-3 px-4 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm" href="{{DATA:SCREEN:SCREEN_4}}">
+                Book Session
+            </a>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center px-margin-desktop h-20 fixed top-0 right-0 w-[calc(100%-16rem)] z-50 bg-surface/80 backdrop-blur-md transition-opacity duration-200">
+<div class="flex-1"></div> <!-- Spacer since search is on right -->
+<div class="flex items-center gap-6">
+<div class="relative">
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-full border-none focus:ring-1 focus:ring-primary text-body-sm font-body-sm w-64" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[20px]">search</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<img class="w-10 h-10 rounded-full object-cover border border-surface-container-highest" data-alt="A close up portrait of a calm individual in a light-filled minimalist room, soft natural lighting, light sage green background, professional yet serene avatar image, high-end photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyZTM9dQUR3Os5xigRsD8H_8PX5qcZAS1s0VoOWLviGzir2SsgqdfU0RfBXU7gMVeUoN8_PO3SP8QJlSQQsewKkh4SW-vU7jZ_OuaE5AligiNglHvaJgNPfhYzYMzb4XueQK1Z1kP5MtFKw6OZSafK5kCSkkdnUxOXTrg8z5R_NWpaNzS5FoqURxttVf6LQB4lOXgaIwNtaO5RjGJBVKDWvPCsrK-HNXk_M9APFI763u3M7d8xvRQN9A"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 mt-0 md:mt-20 overflow-y-auto bg-background p-margin-mobile md:p-margin-desktop pb-32">
+<div class="max-w-container-max-width mx-auto space-y-section-gap">
+<!-- Header Section -->
+<section class="mb-12">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Track Record</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Your wellness journey mapped out. Celebrate the milestones and observe your progress over time.</p>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface rounded-xl p-8 ambient-shadow ambient-shadow-hover flex flex-col justify-between h-48 border border-surface-container-low cursor-default transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-3xl p-3 bg-primary-fixed rounded-full" data-icon="groups" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">All Time</span>
+</div>
+<div>
+<h3 class="font-display text-display text-on-surface">12</h3>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Consultations</p>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-8 ambient-shadow ambient-shadow-hover flex flex-col justify-between h-48 border border-surface-container-low cursor-default transition-all duration-300">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary text-3xl p-3 bg-secondary-fixed rounded-full" data-icon="quiz" style="font-variation-settings: 'FILL' 1;">quiz</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">This Month</span>
+</div>
+<div>
+<h3 class="font-display text-display text-on-surface">5</h3>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tests Completed</p>
+</div>
+</div>
+<div class="bg-primary rounded-xl p-8 shadow-sm flex flex-col justify-between h-48 hover:shadow-md transition-all duration-300 relative overflow-hidden cursor-default hover:-translate-y-1">
+<div class="absolute -right-4 -top-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="flex justify-between items-start relative z-10">
+<span class="material-symbols-outlined text-on-primary text-3xl p-3 bg-white/20 rounded-full" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-sm text-label-sm text-on-primary bg-white/20 px-3 py-1 rounded-full">Active</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-display text-display text-on-primary">30</h3>
+<p class="font-label-md text-label-md text-inverse-primary uppercase tracking-wider">Days Streak</p>
+</div>
+</div>
+</section>
+<!-- Charts & Timeline Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Mood Trends Chart (Visual representation) -->
+<div class="lg:col-span-2 bg-surface rounded-xl p-8 ambient-shadow border border-surface-container-low transition-shadow hover:shadow-md">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Mood Trends</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Average daily mood over the last 30 days</p>
+</div>
+<select class="bg-surface-container border-none rounded-full py-2 px-4 font-label-sm text-label-sm focus:ring-2 focus:ring-primary cursor-pointer hover:bg-surface-container-highest transition-colors">
+<option>Last 30 Days</option>
+<option>Last 3 Months</option>
+</select>
+</div>
+<!-- Simulated Chart -->
+<div class="h-64 w-full relative flex items-end justify-between pb-8 border-b border-surface-container px-2 group cursor-crosshair">
+<!-- Y-axis labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-on-surface-variant font-label-sm text-label-sm pb-8 -ml-6">
+<span>Great</span>
+<span>Good</span>
+<span>Okay</span>
+<span>Low</span>
+</div>
+<!-- Chart Lines (Simulated with SVG for simplicity in UI mockup without JS library) -->
+<svg class="absolute inset-0 w-full h-[calc(100%-2rem)] transition-transform duration-500 group-hover:scale-[1.01]" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,70 Q10,50 20,60 T40,40 T60,30 T80,50 T100,20" fill="none" stroke="#4a654f" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<!-- Fill gradient below line -->
+<path d="M0,70 Q10,50 20,60 T40,40 T60,30 T80,50 T100,20 L100,100 L0,100 Z" fill="url(#chart-gradient)" opacity="0.1"></path>
+<defs>
+<lineargradient id="chart-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#4a654f"></stop>
+<stop offset="100%" stop-color="#fcf9f8"></stop>
+</lineargradient>
+</defs>
+<!-- Data Points -->
+<circle class="hover:r-2 transition-all cursor-pointer" cx="0" cy="70" fill="#4a654f" r="1.5"></circle>
+<circle class="hover:r-2 transition-all cursor-pointer" cx="20" cy="60" fill="#4a654f" r="1.5"></circle>
+<circle class="hover:r-2 transition-all cursor-pointer" cx="40" cy="40" fill="#4a654f" r="1.5"></circle>
+<circle class="hover:r-2 transition-all cursor-pointer" cx="60" cy="30" fill="#4a654f" r="1.5"></circle>
+<circle class="hover:r-2 transition-all cursor-pointer" cx="80" cy="50" fill="#4a654f" r="1.5"></circle>
+<circle class="hover:r-2 transition-all cursor-pointer" cx="100" cy="20" fill="#4a654f" r="1.5"></circle>
+</svg>
+<!-- X-axis labels -->
+<div class="absolute bottom-0 w-full flex justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Week 1</span>
+<span>Week 2</span>
+<span>Week 3</span>
+<span>Week 4</span>
+</div>
+</div>
+</div>
+<!-- Recent Milestones List -->
+<div class="bg-surface rounded-xl p-8 ambient-shadow border border-surface-container-low h-full">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Recent Milestones</h2>
+<div class="space-y-6 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary/20 before:to-transparent">
+<!-- Timeline Item 1 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active cursor-pointer">
+<div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-surface bg-primary text-on-primary shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-sm relative z-10 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] pl-4 md:pl-0">
+<div class="p-4 bg-surface-container-lowest rounded-lg border border-surface-container shadow-sm group-hover:border-primary/30 transition-colors">
+<span class="font-label-sm text-label-sm text-primary mb-1 block">Today</span>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Completed Anxiety Check</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Scores show a 15% improvement.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group cursor-pointer">
+<div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-surface bg-surface-container-highest text-on-surface-variant shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10 transition-colors group-hover:bg-secondary-container group-hover:text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px]">event_available</span>
+</div>
+<div class="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] pl-4 md:pl-0">
+<div class="p-4 bg-transparent rounded-lg group-hover:bg-surface-container-lowest transition-colors">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">2 Days Ago</span>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Session with Dr. Sharma</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Discussed coping strategies.</p>
+</div>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group cursor-pointer">
+<div class="flex items-center justify-center w-8 h-8 rounded-full border-4 border-surface bg-surface-container-highest text-on-surface-variant shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 relative z-10 transition-colors group-hover:bg-tertiary-container group-hover:text-on-tertiary-container">
+<span class="material-symbols-outlined text-[16px]">emoji_events</span>
+</div>
+<div class="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] pl-4 md:pl-0">
+<div class="p-4 bg-transparent rounded-lg group-hover:bg-surface-container-lowest transition-colors">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Last Week</span>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">7 Day Meditation Streak</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Consistent evening practice.</p>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 border border-outline-variant text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-surface-container hover:text-on-surface transition-colors cursor-pointer">
+                        View Full Timeline
+                    </button>
+</div>
+</section>
+</div>
+</main>
+</body></html>

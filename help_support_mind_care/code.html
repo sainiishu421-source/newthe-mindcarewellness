@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Help &amp; Support - Mind Care</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#436463",
+                      "background": "#fcf9f8",
+                      "on-primary-fixed": "#062010",
+                      "surface-container": "#f0eded",
+                      "on-surface": "#1b1c1c",
+                      "surface-container-low": "#f6f3f2",
+                      "surface-dim": "#dcd9d9",
+                      "surface-container-high": "#eae7e7",
+                      "on-secondary-fixed": "#002020",
+                      "inverse-primary": "#b0ceb4",
+                      "primary": "#4a654f",
+                      "tertiary-fixed": "#e7e2d9",
+                      "tertiary-container": "#a6a29a",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#aacdcc",
+                      "on-primary-container": "#253f2b",
+                      "on-tertiary-fixed": "#1d1c16",
+                      "on-surface-variant": "#424842",
+                      "on-tertiary-fixed-variant": "#494740",
+                      "secondary-fixed": "#c5eae8",
+                      "outline-variant": "#c2c8c0",
+                      "on-secondary-container": "#496a69",
+                      "on-secondary-fixed-variant": "#2b4c4c",
+                      "outline": "#737972",
+                      "primary-fixed": "#cceacf",
+                      "inverse-on-surface": "#f3f0f0",
+                      "on-error": "#ffffff",
+                      "primary-container": "#8daa91",
+                      "primary-fixed-dim": "#b0ceb4",
+                      "on-background": "#1b1c1c",
+                      "on-error-container": "#93000a",
+                      "tertiary-fixed-dim": "#cac6be",
+                      "on-primary-fixed-variant": "#334d38",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#fcf9f8",
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#4a654f",
+                      "error-container": "#ffdad6",
+                      "inverse-surface": "#303030",
+                      "on-tertiary-container": "#3b3933",
+                      "surface-container-highest": "#e4e2e1",
+                      "error": "#ba1a1a",
+                      "surface-bright": "#fcf9f8",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#c5eae8",
+                      "tertiary": "#615e57",
+                      "surface-variant": "#e4e2e1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "40px",
+                      "container-max-width": "1200px",
+                      "section-gap": "80px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "display": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ],
+                      "body-sm": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.04em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Smooth accordion transitions */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Focus styles for accessibility */
+        *:focus-visible {
+            outline: 2px solid #8daa91;
+            outline-offset: 2px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-16 pb-24 md:pb-0 md:pt-0">
+<!-- Header (Mobile TopAppBar logic) -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-surface-container shadow-[0_8px_32px_rgba(45,45,45,0.04)] flex justify-between items-center px-margin-mobile h-16 md:hidden">
+<button aria-label="Go back" class="text-primary dark:text-primary-fixed-dim hover:bg-primary-container/20 transition-colors active:scale-95 duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Help &amp; Support</h1>
+<div class="w-10"></div> <!-- Placeholder for balance -->
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow w-full max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-16">
+<!-- Desktop Header -->
+<div class="hidden md:flex items-center mb-8 gap-4">
+<button aria-label="Go back" class="text-primary hover:bg-primary-container/20 transition-colors active:scale-95 duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-display text-display text-primary">Help &amp; Support</h1>
+</div>
+<!-- Search Section -->
+<section class="mb-12">
+<div class="relative max-w-2xl mx-auto md:mx-0">
+<span class="material-symbols-outlined absolute left-4 top-1/2 transform -translate-y-1/2 text-on-surface-variant pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface rounded-xl border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary shadow-[0_8px_32px_rgba(45,45,45,0.04)] font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant transition-all duration-300" placeholder="Search for help or topics..." type="text"/>
+</div>
+</section>
+<!-- FAQ Categories -->
+<section class="max-w-3xl mx-auto md:mx-0 flex flex-col gap-unit">
+<!-- Getting Started -->
+<div class="accordion-item bg-surface rounded-xl shadow-[0_8px_32px_rgba(45,45,45,0.04)] overflow-hidden border border-surface-variant">
+<button aria-expanded="false" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors focus:outline-none">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Getting Started</h2>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-surface-container-lowest">
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant pb-4">
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Account setup and configuration</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>How to book your first session</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Tips for a successful first visit</a></li>
+</ul>
+</div>
+</div>
+<!-- Sessions & Booking -->
+<div class="accordion-item bg-surface rounded-xl shadow-[0_8px_32px_rgba(45,45,45,0.04)] overflow-hidden border border-surface-variant">
+<button aria-expanded="false" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors focus:outline-none">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Sessions &amp; Booking</h2>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-surface-container-lowest">
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant pb-4">
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Rescheduling and cancellations</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Cancellation policy details</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Technical requirements for video</a></li>
+</ul>
+</div>
+</div>
+<!-- Privacy & Security -->
+<div class="accordion-item bg-surface rounded-xl shadow-[0_8px_32px_rgba(45,45,45,0.04)] overflow-hidden border border-surface-variant">
+<button aria-expanded="false" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors focus:outline-none">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Privacy &amp; Security</h2>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-surface-container-lowest">
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant pb-4">
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Data protection practices</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Confidentiality agreement</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Secure payment processing</a></li>
+</ul>
+</div>
+</div>
+<!-- Assessments -->
+<div class="accordion-item bg-surface rounded-xl shadow-[0_8px_32px_rgba(45,45,45,0.04)] overflow-hidden border border-surface-variant">
+<button aria-expanded="false" class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-surface-container-low transition-colors focus:outline-none">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+</div>
+<h2 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface">Assessments</h2>
+</div>
+<span class="material-symbols-outlined accordion-icon text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-surface-container-lowest">
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant pb-4">
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Understanding your results</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>How to take cognitive tests</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>Recommended check-in frequency</a></li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Bottom Contact Section -->
+<section class="mt-16 max-w-xl mx-auto md:mx-0 text-center md:text-left bg-surface-container-low p-8 rounded-xl shadow-[0_8px_32px_rgba(45,45,45,0.04)]">
+<h3 class="font-headline-md text-headline-md-mobile md:text-headline-md text-on-surface mb-2">Still have questions?</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Our dedicated care team is here to help you navigate your wellness journey.</p>
+<button class="bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md py-4 px-8 rounded-full shadow-md transition-all active:scale-95 w-full md:w-auto inline-flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" data-icon="headset_mic">headset_mic</span>
+                Contact Support
+            </button>
+<p class="font-body-sm text-body-sm text-outline mt-4">Available Mon-Fri, 9AM - 6PM</p>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface dark:bg-surface-container-low shadow-[0_-4px_16px_rgba(45,45,45,0.04)] rounded-t-xl md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="grid_view">grid_view</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="quiz">quiz</span>
+<span class="font-label-sm text-label-sm">Assessments</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm">Track</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Accordion Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const button = item.querySelector('button');
+                
+                button.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all other accordions (optional, remove if you want multiple open)
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('button').setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    
+                    // Toggle current accordion
+                    if (isActive) {
+                        item.classList.remove('active');
+                        button.setAttribute('aria-expanded', 'false');
+                    } else {
+                        item.classList.add('active');
+                        button.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+        });
+    </script>
+</body></html>

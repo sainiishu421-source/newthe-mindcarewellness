@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mind Care - Book a Session</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dcd9d9",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#334d38",
+                        "outline-variant": "#c2c8c0",
+                        "tertiary-fixed": "#e7e2d9",
+                        "on-primary-fixed": "#062010",
+                        "tertiary": "#615e57",
+                        "surface": "#fcf9f8",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "surface-variant": "#e4e2e1",
+                        "surface-tint": "#4a654f",
+                        "surface-bright": "#fcf9f8",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f6f3f2",
+                        "on-surface-variant": "#424842",
+                        "primary-fixed": "#cceacf",
+                        "tertiary-container": "#a6a29a",
+                        "primary-container": "#8daa91",
+                        "primary": "#4a654f",
+                        "on-primary-container": "#253f2b",
+                        "on-secondary-fixed": "#002020",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#c5eae8",
+                        "background": "#fcf9f8",
+                        "outline": "#737972",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#e4e2e1",
+                        "primary-fixed-dim": "#b0ceb4",
+                        "on-secondary-container": "#496a69",
+                        "inverse-primary": "#b0ceb4",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "secondary": "#436463",
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-secondary-fixed-variant": "#2b4c4c",
+                        "inverse-surface": "#303030",
+                        "on-tertiary-container": "#3b3933",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#c5eae8",
+                        "secondary-fixed-dim": "#aacdcc",
+                        "surface-container-high": "#eae7e7",
+                        "on-surface": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "80px",
+                        "unit": "8px",
+                        "container-max-width": "1200px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Mobile first layout */
+        body { max-width: 480px; margin: 0 auto; background-color: theme('colors.background'); }
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased font-body-md h-[884px] flex flex-col relative overflow-hidden">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-[0_8px_32px_rgba(45,45,45,0.04)] max-w-[480px]">
+<div class="flex justify-between items-center px-margin-mobile h-16 w-full">
+<button class="text-on-surface-variant active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Book a Session</h1>
+<div class="w-6"></div> <!-- Spacer for centering -->
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-highest h-1">
+<div class="bg-primary h-full w-1/2 transition-all duration-300 rounded-r-full" id="progress-bar"></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto pt-20 pb-24 px-margin-mobile">
+<!-- Step 1: Date & Time -->
+<div class="flex flex-col gap-8 transition-opacity duration-300" id="step-1">
+<div class="text-center mt-4">
+<p class="font-label-md text-label-md text-primary uppercase tracking-wider mb-2">Step 1 of 2</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Consultation</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">with Dr. Ananya Sharma</p>
+</div>
+<!-- Calendar Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_8px_32px_rgba(45,45,45,0.04)]">
+<div class="flex justify-between items-center mb-6">
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<h3 class="font-label-md text-label-md text-on-surface">October 2023</h3>
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+<div class="grid grid-cols-7 gap-y-4 gap-x-2 text-center mb-2">
+<div class="font-label-sm text-label-sm text-on-surface-variant">S</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">M</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">T</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">W</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">T</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">F</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">S</div>
+<!-- Empty slots for formatting -->
+<div></div>
+<div></div>
+<!-- Days -->
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">1</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">2</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">3</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">4</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">5</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">6</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">7</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">8</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">9</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">10</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">11</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">12</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">13</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">14</div>
+<div class="font-body-md text-body-md text-on-primary bg-primary p-2 cursor-pointer rounded-full shadow-md">15</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">16</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">17</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">18</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">19</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">20</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">21</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">22</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">23</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">24</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">25</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">26</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">27</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">28</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">29</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">30</div>
+<div class="font-body-md text-body-md text-on-surface p-2 cursor-pointer rounded-full hover:bg-surface-container transition-colors">31</div>
+</div>
+</div>
+<!-- Time Slots -->
+<div class="flex flex-col gap-4">
+<h3 class="font-label-md text-label-md text-on-surface ml-2">Available Times</h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="bg-surface-container-lowest border border-outline-variant rounded-lg py-3 px-2 font-body-md text-body-md text-on-surface hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all">09:00 AM</button>
+<button class="bg-surface-container-lowest border border-outline-variant rounded-lg py-3 px-2 font-body-md text-body-md text-on-surface hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all">09:30 AM</button>
+<button class="bg-primary-container border-primary text-on-primary-container rounded-lg py-3 px-2 font-label-md text-label-md shadow-sm transition-all flex items-center justify-center gap-1">10:30 AM</button>
+<button class="bg-surface-container-lowest border border-outline-variant rounded-lg py-3 px-2 font-body-md text-body-md text-on-surface hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all">02:00 PM</button>
+<button class="bg-surface-container-lowest border border-outline-variant rounded-lg py-3 px-2 font-body-md text-body-md text-on-surface hover:border-primary focus:border-primary focus:ring-1 focus:ring-primary transition-all">03:30 PM</button>
+<button class="bg-surface-container-highest border border-surface-container-highest rounded-lg py-3 px-2 font-body-md text-body-md text-on-surface-variant opacity-50 cursor-not-allowed">04:00 PM</button>
+</div>
+</div>
+</div>
+<!-- Step 2: Confirmation Summary (Initially Hidden) -->
+<div class="hidden flex-col gap-8 transition-opacity duration-300" id="step-2">
+<div class="text-center mt-4">
+<p class="font-label-md text-label-md text-primary uppercase tracking-wider mb-2">Step 2 of 2</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Review Details</h2>
+</div>
+<!-- Summary Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_8px_32px_rgba(45,45,45,0.04)] border border-surface-container-highest flex flex-col gap-6">
+<div class="flex items-center gap-4 border-b border-surface-container pb-6">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of an Indian female therapist, Dr. Ananya Sharma, smiling warmly. She is wearing a soft sage green top. The lighting is soft and natural, creating a calming, high-end studio aesthetic suitable for a mental wellness app. The background is a minimalist, slightly blurred off-white environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMP_HGSwrExA1Hza29zSLhZmWUnReLsp7Wcr2LeqkrMFhu0AXTTjQi_Jmnz_sbvHFh2UAU6ZZGeSY7cqpOV4i2bNVSR5Zs325CFv7TiakeMoOANEoFUwgmIIWU7wordXfWUkTvtc87L3osx3LGAsPY8MkWL-GsYFgl1cR-qTRVZpwNZ_VsfrHTkPfga57FOipV2yrFhdj-E23eLll8pFBAXDViIthg7r6RMLxEYwdiSmw0rDt7VHTUCg"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-lg">Dr. Ananya Sharma</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Clinical Psychologist</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Date</p>
+<p class="font-body-md text-body-md text-on-surface">Oct 15, 2023</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Time</p>
+<p class="font-body-md text-body-md text-on-surface">10:30 AM</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Duration</p>
+<p class="font-body-md text-body-md text-on-surface">50 mins</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Format</p>
+<p class="font-body-md text-body-md text-on-surface flex items-center gap-1"><span class="material-symbols-outlined text-sm">videocam</span> Video Call</p>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-4 flex justify-between items-center mt-2">
+<span class="font-label-md text-label-md text-on-surface">Total Session Fee</span>
+<span class="font-headline-md text-headline-md text-primary text-xl">₹799</span>
+</div>
+</div>
+<!-- Payment Method -->
+<div class="flex flex-col gap-4">
+<h3 class="font-label-md text-label-md text-on-surface ml-2">Payment Method</h3>
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_16px_rgba(45,45,45,0.02)] border border-primary flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 bg-surface-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-lg">credit_card</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Visa ending in 4242</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Expires 12/25</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary fill">check_circle</span>
+</div>
+<button class="flex items-center justify-center gap-2 p-4 border border-dashed border-outline-variant rounded-xl text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-md text-label-md">Add Payment Method</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Contextual FAB Replacement) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest px-margin-mobile py-4 shadow-[0_-8px_32px_rgba(45,45,45,0.06)] max-w-[480px] z-50 rounded-t-2xl">
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-full active:scale-95 transition-transform shadow-md flex justify-center items-center gap-2" id="next-btn">
+<span>Next: Review Details</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<script>
+        const step1 = document.getElementById('step-1');
+        const step2 = document.getElementById('step-2');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const backBtn = document.querySelector('header button');
+
+        let currentStep = 1;
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep === 1) {
+                // Transition to Step 2
+                step1.classList.add('opacity-0');
+                setTimeout(() => {
+                    step1.classList.add('hidden');
+                    step1.classList.remove('flex', 'opacity-0');
+                    
+                    step2.classList.remove('hidden');
+                    step2.classList.add('flex', 'opacity-0');
+                    
+                    // Trigger reflow
+                    void step2.offsetWidth;
+                    
+                    step2.classList.remove('opacity-0');
+                    
+                    // Update UI elements
+                    progressBar.classList.remove('w-1/2', 'rounded-r-full');
+                    progressBar.classList.add('w-full');
+                    
+                    nextBtn.innerHTML = `
+                        <span class="material-symbols-outlined text-sm">lock</span>
+                        <span>Confirm & Pay</span>
+                    `;
+                    currentStep = 2;
+                }, 300);
+            }
+        });
+
+        backBtn.addEventListener('click', () => {
+            if (currentStep === 2) {
+                 // Transition to Step 1
+                step2.classList.add('opacity-0');
+                setTimeout(() => {
+                    step2.classList.add('hidden');
+                    step2.classList.remove('flex', 'opacity-0');
+                    
+                    step1.classList.remove('hidden');
+                    step1.classList.add('flex', 'opacity-0');
+                    
+                    // Trigger reflow
+                    void step1.offsetWidth;
+                    
+                    step1.classList.remove('opacity-0');
+                    
+                    // Update UI elements
+                    progressBar.classList.remove('w-full');
+                    progressBar.classList.add('w-1/2', 'rounded-r-full');
+                    
+                    nextBtn.innerHTML = `
+                        <span>Next: Review Details</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    `;
+                    currentStep = 1;
+                }, 300);
+            }
+        });
+    </script>
+</body></html>

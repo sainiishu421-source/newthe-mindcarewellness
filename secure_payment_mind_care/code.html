@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Complete Booking - Mind Care</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-on-surface": "#f3f0f0",
+                        "on-primary-fixed": "#062010",
+                        "on-secondary-container": "#496a69",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed": "#cceacf",
+                        "outline-variant": "#c2c8c0",
+                        "on-secondary-fixed": "#002020",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#a6a29a",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "on-tertiary-container": "#3b3933",
+                        "primary-fixed-dim": "#b0ceb4",
+                        "on-surface-variant": "#424842",
+                        "on-background": "#1b1c1c",
+                        "secondary-fixed-dim": "#aacdcc",
+                        "inverse-primary": "#b0ceb4",
+                        "on-primary-fixed-variant": "#334d38",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-tint": "#4a654f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#c5eae8",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "tertiary": "#615e57",
+                        "surface-bright": "#fcf9f8",
+                        "surface-dim": "#dcd9d9",
+                        "primary-container": "#8daa91",
+                        "outline": "#737972",
+                        "surface-variant": "#e4e2e1",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#c5eae8",
+                        "on-surface": "#1b1c1c",
+                        "tertiary-fixed": "#e7e2d9",
+                        "surface-container": "#f0eded",
+                        "secondary": "#436463",
+                        "on-primary-container": "#253f2b",
+                        "background": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303030",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#2b4c4c",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#4a654f",
+                        "surface": "#fcf9f8"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "container-max-width": "1200px",
+                        "margin-desktop": "40px",
+                        "section-gap": "80px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-mobile": "20px"
+                    },
+                    fontFamily: {
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "display": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-md": ["Manrope"]
+                    },
+                    fontSize: {
+                        "label-md": ["14px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "display": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.04em", fontWeight: "500" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-16 pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-[0_8px_32px_rgba(45,45,45,0.04)] flex justify-between items-center px-margin-mobile h-16 w-full">
+<button aria-label="Go back" class="text-on-surface-variant hover:bg-primary-container/20 transition-colors active:scale-95 transition-transform duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold">Complete Booking</h1>
+<div class="w-10"></div> <!-- Spacer to center the title -->
+</header>
+<main class="flex-1 max-w-container-max-width mx-auto w-full px-margin-mobile md:px-margin-desktop py-8 flex flex-col gap-8 md:max-w-[600px]">
+<!-- Session Summary Card -->
+<section class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_8px_32px_rgba(45,45,45,0.04)] flex flex-col gap-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Session Summary</h2>
+<div class="flex items-center gap-4 border-b border-surface-variant pb-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Consultation with Dr. Ananya Sharma</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="event">event</span>
+                        Tomorrow, Oct 16 • 10:30 AM
+                    </p>
+</div>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Session Fee</span>
+<span class="font-headline-md text-headline-md text-primary">₹799</span>
+</div>
+</section>
+<!-- Payment Methods -->
+<section class="flex flex-col gap-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Payment Method</h2>
+<div class="flex flex-col gap-3">
+<!-- Saved Method 1 -->
+<label class="bg-surface-container-lowest border border-primary rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:bg-surface-container-low transition-colors relative">
+<input checked="" class="text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="payment" type="radio"/>
+<div class="w-10 h-6 bg-surface-variant rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant" data-icon="credit_card">credit_card</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface flex-1">Visa ending in 4242</span>
+<span class="absolute top-2 right-2 flex w-3 h-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+</label>
+<!-- Saved Method 2 -->
+<label class="bg-surface-container-lowest border border-surface-variant rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="payment" type="radio"/>
+<div class="w-10 h-6 bg-surface-variant rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface flex-1">Apple Pay</span>
+</label>
+</div>
+<button class="mt-2 w-full py-3 px-4 border border-primary text-primary rounded-full font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary-container/10 transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Add New Payment Method
+            </button>
+</section>
+<!-- Security Assurance -->
+<div class="mt-auto pt-8 pb-4 flex items-center justify-center gap-2 text-on-surface-variant opacity-75">
+<span class="material-symbols-outlined text-[16px]" data-icon="lock">lock</span>
+<p class="font-label-sm text-label-sm">Your payment is secured with 256-bit encryption.</p>
+</div>
+</main>
+<!-- Fixed Footer -->
+<footer class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest border-t border-surface-variant px-margin-mobile py-4 pb-safe flex justify-between items-center shadow-[0_-4px_16px_rgba(45,45,45,0.04)] md:px-margin-desktop md:justify-center">
+<div class="md:max-w-[600px] w-full flex justify-between items-center gap-4">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total Amount</span>
+<span class="font-headline-md text-headline-md text-on-surface">₹799</span>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md py-3 px-8 rounded-full hover:bg-primary/90 transition-colors shadow-sm active:scale-95">
+                Pay &amp; Book
+            </button>
+</div>
+</footer>
+</body></html>

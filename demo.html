@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mind Care - Interactive React Sanctuary</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- React & Babel CDNs -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Config matching DESIGN.md -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4a654f', // Sage Green
+            'primary-container': '#8daa91',
+            'on-primary': '#ffffff',
+            'on-primary-container': '#253f2b',
+            'primary-fixed': '#cceacf',
+            'primary-fixed-dim': '#b0ceb4',
+            'on-primary-fixed': '#062010',
+            'on-primary-fixed-variant': '#334d38',
+
+            secondary: '#436463', // Muted Teal
+            'secondary-container': '#c5eae8',
+            'on-secondary': '#ffffff',
+            'on-secondary-container': '#496a69',
+            'secondary-fixed': '#c5eae8',
+            'secondary-fixed-dim': '#aacdcc',
+            'on-secondary-fixed': '#002020',
+            'on-secondary-fixed-variant': '#2b4c4c',
+
+            tertiary: '#615e57', // Light Beige
+            'tertiary-container': '#a6a29a',
+            'on-tertiary': '#ffffff',
+            'on-tertiary-container': '#3b3933',
+            'tertiary-fixed': '#e7e2d9',
+            'tertiary-fixed-dim': '#cac6be',
+            'on-tertiary-fixed': '#1d1c16',
+            'on-tertiary-fixed-variant': '#494740',
+
+            error: '#ba1a1a',
+            'on-error': '#ffffff',
+            'error-container': '#ffdad6',
+            'on-error-container': '#93000a',
+
+            background: '#fcf9f8', // Off-White
+            'on-background': '#1b1c1c', // Dark Charcoal
+
+            surface: '#fcf9f8',
+            'on-surface': '#1b1c1c',
+            'on-surface-variant': '#424842',
+            'surface-dim': '#dcd9d9',
+            'surface-bright': '#fcf9f8',
+            'surface-container-lowest': '#ffffff',
+            'surface-container-low': '#f6f3f2',
+            'surface-container': '#f0eded',
+            'surface-container-high': '#eae7e7',
+            'surface-container-highest': '#e4e2e1',
+            'inverse-surface': '#303030',
+            'inverse-on-surface': '#f3f0f0',
+            'inverse-primary': '#b0ceb4',
+
+            outline: '#737972',
+            'outline-variant': '#c2c8c0',
+            'surface-tint': '#4a654f',
+          },
+          borderRadius: {
+            'sm': '0.25rem',
+            'DEFAULT': '0.5rem',
+            'md': '0.75rem',
+            'lg': '1rem',
+            'xl': '1.5rem',
+            'full': '9999px',
+          },
+          spacing: {
+            'unit': '8px',
+            'container-max-width': '1200px',
+            'gutter': '24px',
+            'margin-mobile': '20px',
+            'margin-desktop': '40px',
+            'section-gap': '80px',
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  
+  <!-- CSS Animations -->
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+    }
+    .ambient-shadow {
+      box-shadow: 0 8px 32px rgba(45, 45, 45, 0.04);
+    }
+    .soft-shadow {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+    .card-lift {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(45, 45, 45, 0.08);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+    .animate-slide-up {
+      animation: slideUp 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen">
+
+  <div id="root"></div>
+
+  <!-- React Code Transpiled via Babel Standalone -->
+  <script type="text/babel">
+    const { useState } = React;
+
+    const initialConsultants = [
+      {
+        id: 'dr_ananya_sharma',
+        name: 'Dr. Ananya Sharma',
+        title: 'Clinical Psychologist, Ph.D.',
+        specialties: ['Anxiety', 'Depression', 'Trauma'],
+        rating: 4.9,
+        reviews: '120+',
+        experience: '10 Years',
+        languages: 'English, Hindi',
+        cost: 150,
+        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAtD0k7joFXApSUN5fqx1TQFqH_ELVGT8Ix_pL2oDRqbL1Lu68ExijA9UMnNxBx-POwkniXBNJM-GOsLmTsIZ49ClMgUPOquiAxjG0WlZF4_ZG_ysh01gIS9GmYARN85fLlZpa573opUQkAWp4aLgyycabwLJMAL4wR9PP59lZcypYVd6D2uKnwtzduXVviGuhkuyDEDBfVwVFFpckzjMFsLe3JAh_MlpOX4Joz_-53LyM3COQvSimi7Q',
+        bio: 'Dr. Ananya Sharma is a compassionate Clinical Psychologist dedicated to helping individuals navigate life\'s complexities. With over a decade of experience, she specializes in evidence-based therapies like CBT and mindfulness-based interventions. Her approach is collaborative, aiming to create a safe, non-judgmental space for healing and personal growth.'
+      },
+      {
+        id: 'dr_james_wilson',
+        name: 'Dr. James Wilson',
+        title: 'Clinical Psychologist',
+        specialties: ['Anxiety', 'Stress', 'Grief'],
+        rating: 4.8,
+        reviews: '95+',
+        experience: '8 Years',
+        languages: 'English',
+        cost: 130,
+        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDuRxcVAxGftqvpsTjDX12nHycyMxUe7XSqmPJ10cIb5PO1vFkR2PT_qNnDa7F3jFUdXSkfwo0jTKj5SW9BUv9tMkZrZeTWTw59MDekcahjCiuIh3h7I1jR_OTV_7kLbbJ4fHRBZwOFm4d4NZ7w9jnUA9QTuXB_JV98Rh8XwXGakrW6Sn1WCR5z2tCXz5ZmFarQNCifPr6jG0JnREaQkSBIJG4-DGXD9jjuipngkhsgoCaEnrYHT4cAsg',
+        bio: 'Dr. James Wilson specializes in cognitive behavioral therapy for anxiety disorders, daily stress management, and emotional support through difficult life transitions.'
+      },
+      {
+        id: 'sarah_jenkins',
+        name: 'Sarah Jenkins',
+        title: 'Holistic Therapist',
+        specialties: ['Mindfulness', 'Life Transitions', 'Self-Esteem'],
+        rating: 4.7,
+        reviews: '80+',
+        experience: '6 Years',
+        languages: 'English, Spanish',
+        cost: 120,
+        imageUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuANVfVPxapGQiQokkUlIkcH79oLI5Krm5Iz9BMFnn1D1LJa1QRWOCRgs88wCtHSqRojzs_u_ILrUVIC1co_oxF8bf5D4OG4oVqA18uROmwUIoFcWugmPFbQqF8tn6TSPKL2xc68t9ZVq4HAgZVAZYqr8n7RfW8LgfCH96rgo7yLpY1709vulfTgwNqHLw9MBXGwvvaK4XBN3-aCoaMrjnMmogxHiG3IkNMDEHuKz79-d9FrqW0JHNED9g',
+        bio: 'Sarah Jenkins incorporates somatic and mindfulness-based therapies into her practice to help individuals reconnect with their bodies and find emotional alignment.'
+      }
+    ];
+
+    const initialMilestones = [
+      {
+        id: 1,
+        title: 'Completed Anxiety Assessment',
+        detail: 'Scores improved by 15% compared to last month.',
+        date: 'Today',
+        icon: 'emoji_events',
+        isPrimary: true
+      },
+      {
+        id: 2,
+        title: 'Therapy Session',
+        detail: 'Discussed coping mechanisms for daily stress.',
+        date: 'Oct 24, 2026',
+        icon: 'psychology',
+        isPrimary: false
+      },
+      {
+        id: 3,
+        title: 'Completed Stress Check',
+        detail: 'Identified workload and lack of sleep as main stressors.',
+        date: 'Oct 15, 2026',
+        icon: 'assignment',
+        isPrimary: false
+      }
+    ];
+
+    const faqs = [
+      {
+        category: 'Getting Started',
+        icon: 'rocket_launch',
+        items: [
+          { q: 'What is Mind Care?', a: 'Mind Care is a digital sanctuary that provides access to clinical-grade mental health assessments, wellness progress tracking, and professional consultation with certified therapists.' },
+          { q: 'How do I start an assessment?', a: 'Simply head to the "Assessments" page, choose a test that fits your current focus area (such as Stress Check or Anxiety Check), and click "Start Test".' }
+        ]
+      },
+      {
+        category: 'Sessions & Booking',
+        icon: 'calendar_month',
+        items: [
+          { q: 'How do I book a consultation session?', a: 'You can go to the "Consultations" page, select a therapist, pick a date and time slot that fits your schedule, fill out the consultation details, and complete the secure payment.' },
+          { q: 'Can I cancel or reschedule my session?', a: 'Yes. You can reschedule or cancel a session up to 24 hours prior to the scheduled start time from your Dashboard or History tab.' }
+        ]
+      },
+      {
+        category: 'Privacy & Security',
+        icon: 'shield',
+        items: [
+          { q: 'Is my personal information secure?', a: 'Absolutely. We utilize enterprise-grade 256-bit AES encryption to secure your data both in transit and at rest. Your sessions are private and HIPAA-compliant.' },
+          { q: 'Who has access to my assessment results?', a: 'Only you and any healthcare providers you explicitly choose to share them with can access your results. We never sell your data.' }
+        ]
+      },
+      {
+        category: 'Assessments',
+        icon: 'quiz',
+        items: [
+          { q: 'Are these assessments clinically validated?', a: 'Yes. Our tests are modeled on gold-standard clinical screeners, such as the GAD-7 for anxiety tracking, ensuring high-quality insights.' },
+          { q: 'How often should I take an assessment?', a: 'We recommend taking checking assessments once a week or biweekly to monitor changes in your emotional wellbeing over time.' }
+        ]
+      }
+    ];
+
+    function App() {
+      // Navigation
+      const [activeTab, setActiveTab] = useState('dashboard');
+      
+      // App Stats / Data States
+      const [streakDays, setStreakDays] = useState(14);
+      const [completedTestsCount, setCompletedTestsCount] = useState(8);
+      const [milestones, setMilestones] = useState(initialMilestones);
+      
+      // User Interactive Mood Check-in
+      const [userMood, setUserMood] = useState(null);
+      const [moodMessage, setMoodMessage] = useState('How are you feeling today?');
+
+      // Booking Flow States
+      const [selectedConsultant, setSelectedConsultant] = useState(initialConsultants[0]);
+      const [bookingDate, setBookingDate] = useState('Oct 12');
+      const [bookingTime, setBookingTime] = useState('3:00 PM');
+      const [sessionFormat, setSessionFormat] = useState('Video call');
+      const [sessionReason, setSessionReason] = useState('');
+      const [sessionDuration, setSessionDuration] = useState(60); // 30 or 60 mins
+      const [bookingState, setBookingState] = useState(null); // 'details', 'payment', or null
+      const [promoCode, setPromoCode] = useState('');
+      const [discountPercent, setDiscountPercent] = useState(0);
+      const [promoError, setPromoError] = useState('');
+      const [paymentCard, setPaymentCard] = useState({ number: '', expiry: '', cvv: '', name: '' });
+      const [paymentErrors, setPaymentErrors] = useState({});
+      const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+      // Active Assessment State
+      const [activeAssessment, setActiveAssessment] = useState(null);
+      const [quizStep, setQuizStep] = useState(0);
+      const [quizAnswers, setQuizAnswers] = useState({});
+      const [quizResult, setQuizResult] = useState(null);
+
+      // Mock Video Call State
+      const [showVideoCall, setShowVideoCall] = useState(false);
+      const [videoCallDuration, setVideoCallDuration] = useState('45:00');
+
+      // FAQ Search
+      const [faqSearch, setFaqSearch] = useState('');
+      const [openFaqs, setOpenFaqs] = useState({});
+
+      // Navigation handlers
+      const handleNavigate = (tab) => {
+        setActiveTab(tab);
+        setBookingState(null);
+        setPaymentSuccess(false);
+        setActiveAssessment(null);
+        setQuizResult(null);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      const handleMoodSelect = (mood) => {
+        setUserMood(mood);
+        if (mood === 'Calm') setMoodMessage('We\'re glad you feel calm in your sanctuary today.');
+        if (mood === 'Anxious') setMoodMessage('Take a deep breath. You are in a safe space.');
+        if (mood === 'Tired') setMoodMessage('Remember to give yourself permission to rest.');
+        if (mood === 'Focused') setMoodMessage('Fostering clarity. What would you like to achieve?');
+      };
+
+      // Assessment Quiz definition
+      const anxietyQuiz = {
+        title: 'Anxiety Check (GAD-7)',
+        subtitle: 'Over the last 2 weeks, how often have you been bothered by the following problems?',
+        questions: [
+          'Feeling nervous, anxious or on edge',
+          'Not being able to stop or control worrying',
+          'Worrying too much about different things',
+          'Trouble relaxing',
+          'Being so restless that it is hard to sit still',
+          'Becoming easily annoyed or irritable',
+          'Feeling afraid as if something awful might happen'
+        ],
+        options: [
+          { text: 'Not at all', score: 0 },
+          { text: 'Several days', score: 1 },
+          { text: 'More than half the days', score: 2 },
+          { text: 'Nearly every day', score: 3 }
+        ]
+      };
+
+      const startQuiz = (type) => {
+        setActiveAssessment(type);
+        setQuizStep(0);
+        setQuizAnswers({});
+        setQuizResult(null);
+      };
+
+      const handleSelectQuizOption = (optionScore) => {
+        const nextAnswers = { ...quizAnswers, [quizStep]: optionScore };
+        setQuizAnswers(nextAnswers);
+
+        if (quizStep < anxietyQuiz.questions.length - 1) {
+          setQuizStep(quizStep + 1);
+        } else {
+          // Calculate results
+          const totalScore = Object.values(nextAnswers).reduce((sum, s) => sum + s, 0);
+          let severity = 'Minimal';
+          let recommendation = 'Your anxiety levels are currently minimal. Keep practicing daily mindfulness to maintain your wellbeing.';
+          
+          if (totalScore >= 5 && totalScore <= 9) {
+            severity = 'Mild';
+            recommendation = 'You have mild anxiety symptoms. We recommend reviewing stress management articles, tracking your daily moods, and engaging in deep breathing exercises.';
+          } else if (totalScore >= 10 && totalScore <= 14) {
+            severity = 'Moderate';
+            recommendation = 'You are experiencing moderate anxiety symptoms. Regularly scheduling 30-min therapy check-ins can provide effective coping tools.';
+          } else if (totalScore >= 15) {
+            severity = 'Severe';
+            recommendation = 'Your anxiety level indicates severe symptoms. We strongly suggest booking a comprehensive video session with a clinical psychologist like Dr. Ananya Sharma for targeted support.';
+          }
+
+          setQuizResult({
+            score: totalScore,
+            severity,
+            recommendation
+          });
+        }
+      };
+
+      const handleSaveQuizResults = () => {
+        // Add assessment to milestones list
+        const newMilestone = {
+          id: Date.now(),
+          title: `Anxiety Check Result: ${quizResult.severity}`,
+          detail: `Scored ${quizResult.score}/21. ${quizResult.recommendation.split('.')[0]}.`,
+          date: 'Today',
+          icon: 'verified',
+          isPrimary: true
+        };
+        setMilestones([newMilestone, ...milestones]);
+        setCompletedTestsCount(completedTestsCount + 1);
+        setActiveAssessment(null);
+        setQuizResult(null);
+        setActiveTab('track_record');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      // Promo Code Handler
+      const handleApplyPromo = () => {
+        setPromoError('');
+        if (promoCode.trim().toUpperCase() === 'MINDCARE10') {
+          setDiscountPercent(10);
+        } else {
+          setPromoError('Invalid coupon code. Try MINDCARE10');
+          setDiscountPercent(0);
+        }
+      };
+
+      // Payment Handler
+      const handlePayConfirm = (e) => {
+        e.preventDefault();
+        const errors = {};
+        if (!paymentCard.number || paymentCard.number.length < 16) errors.number = 'Please enter a valid 16-digit card number';
+        if (!paymentCard.expiry || !paymentCard.expiry.includes('/')) errors.expiry = 'Please enter expiry date (MM/YY)';
+        if (!paymentCard.cvv || paymentCard.cvv.length < 3) errors.cvv = 'Please enter a valid CVV';
+        if (!paymentCard.name) errors.name = 'Please enter the cardholder name';
+
+        if (Object.keys(errors).length > 0) {
+          setPaymentErrors(errors);
+        } else {
+          setPaymentErrors({});
+          setPaymentSuccess(true);
+          // Add transaction milestone
+          const newMilestone = {
+            id: Date.now(),
+            title: `Booked Consultation with ${selectedConsultant.name}`,
+            detail: `Scheduled for ${bookingDate} at ${bookingTime} via ${sessionFormat}.`,
+            date: 'Today',
+            icon: 'check_circle',
+            isPrimary: true
+          };
+          setMilestones([newMilestone, ...milestones]);
+        }
+      };
+
+      // FAQ accordion toggler
+      const toggleFaq = (index) => {
+        setOpenFaqs(prev => ({ ...prev, [index]: !prev[index] }));
+      };
+
+      return (
+        <div className="bg-[#FAFAFA] text-on-surface antialiased flex flex-col md:flex-row min-h-screen relative font-sans">
+          
+          {/* Desktop Sidebar Navigation */}
+          <aside className="hidden md:flex flex-col py-8 px-4 h-screen w-64 fixed left-0 top-0 bg-surface shadow-sm z-40 bg-surface-container-low transition-all duration-300 ease-in-out border-r border-outline-variant/10">
+            <div className="flex items-center gap-3 mb-10 px-4 cursor-pointer" onClick={() => handleNavigate('dashboard')}>
+              <img alt="Mind Care logo" className="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVO-aE9_a21aEW4sT-sPoi1rQ19hYVxT8BrkpBeuifi9bW-wyqKP0SMdApTB7AJ0UhF6SyCPlAHskvy_GYTdW2FGETXlEPbGvmlIhtce8XiXMC5aNJGMTu_WDkCEs5CDkGWauTYO8HIj9BnQPlMgWxh2qN133FvYMNVIRoxOj-gR8LXgqwGzgKqqmknR7tN-UsEhuR6_qimFLUJUX3rg5jmOzRaMKb5NuhA1vGVe36TlInLQR5wOXxwg"/>
+              <div>
+                <h1 className="text-xl font-bold text-primary">Mind Care</h1>
+                <p className="text-xs text-on-surface-variant tracking-wider">Digital Sanctuary</p>
+              </div>
+            </div>
+            
+            <nav className="flex-1 space-y-2">
+              <button 
+                onClick={() => handleNavigate('dashboard')}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-left font-semibold ${activeTab === 'dashboard' ? 'text-primary bg-secondary-container/30 border-r-4 border-primary' : 'text-on-surface-variant hover:bg-secondary-container/50'}`}>
+                <span className="material-symbols-outlined">dashboard</span>
+                Dashboard
+              </button>
+              <button 
+                onClick={() => handleNavigate('assessments')}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-left font-semibold ${activeTab === 'assessments' ? 'text-primary bg-secondary-container/30 border-r-4 border-primary' : 'text-on-surface-variant hover:bg-secondary-container/50'}`}>
+                <span className="material-symbols-outlined">quiz</span>
+                Assessments
+              </button>
+              <button 
+                onClick={() => handleNavigate('track_record')}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-left font-semibold ${activeTab === 'track_record' ? 'text-primary bg-secondary-container/30 border-r-4 border-primary' : 'text-on-surface-variant hover:bg-secondary-container/50'}`}>
+                <span className="material-symbols-outlined">insights</span>
+                Track Record
+              </button>
+              <button 
+                onClick={() => handleNavigate('consultations')}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-left font-semibold ${activeTab === 'consultations' ? 'text-primary bg-secondary-container/30 border-r-4 border-primary' : 'text-on-surface-variant hover:bg-secondary-container/50'}`}>
+                <span className="material-symbols-outlined">groups</span>
+                Consultations
+              </button>
+              <button 
+                onClick={() => handleNavigate('help_support')}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-left font-semibold ${activeTab === 'help_support' ? 'text-primary bg-secondary-container/30 border-r-4 border-primary' : 'text-on-surface-variant hover:bg-secondary-container/50'}`}>
+                <span className="material-symbols-outlined">help</span>
+                Help & Support
+              </button>
+              <button 
+                onClick={() => handleNavigate('privacy_security')}
+                className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-left font-semibold ${activeTab === 'privacy_security' ? 'text-primary bg-secondary-container/30 border-r-4 border-primary' : 'text-on-surface-variant hover:bg-secondary-container/50'}`}>
+                <span className="material-symbols-outlined">shield_lock</span>
+                Privacy & Security
+              </button>
+            </nav>
+            
+            <div className="mt-auto pt-6 border-t border-surface-variant">
+              <button 
+                onClick={() => { setSelectedConsultant(initialConsultants[0]); handleNavigate('consultations'); }}
+                className="w-full bg-primary text-on-primary py-3 px-4 rounded-full font-bold hover:bg-primary/95 transition-all duration-300 shadow-md transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2">
+                <span className="material-symbols-outlined text-lg">calendar_today</span>
+                Book Session
+              </button>
+            </div>
+          </aside>
+
+          {/* Desktop Header App Bar */}
+          <header className="hidden md:flex justify-between items-center px-margin-desktop h-20 fixed top-0 right-0 w-[calc(100%-16rem)] z-30 bg-surface/80 backdrop-blur-md transition-opacity duration-200 border-b border-outline-variant/10">
+            <div>
+              <h2 className="text-lg font-bold text-on-surface-variant capitalize">{activeTab.replace('_', ' ')}</h2>
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="relative">
+                <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input 
+                  className="pl-10 pr-4 py-2 rounded-full border border-outline-variant bg-surface/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-sm w-64" 
+                  placeholder="Search features, tools..." 
+                  type="text"
+                />
+              </div>
+              <div className="flex items-center gap-4">
+                <button className="text-on-surface-variant hover:text-primary transition-colors p-1.5 hover:bg-surface-container rounded-full">
+                  <span className="material-symbols-outlined">notifications</span>
+                </button>
+                <button onClick={() => handleNavigate('help_support')} className="text-on-surface-variant hover:text-primary transition-colors p-1.5 hover:bg-surface-container rounded-full">
+                  <span className="material-symbols-outlined">help</span>
+                </button>
+                <div className="h-8 w-px bg-surface-container-highest"></div>
+                <div className="flex items-center gap-2">
+                  <img className="w-10 h-10 rounded-full border border-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT4_acYkpaqwuyRb0zbDwjmnnic1Zy-rL6Ktz7kbVXyjk7Sfv9u8H0OGcG9O3W3ip0wdVz9wuCn7p9HPoUi-O2IJ_D6gBtBH-hsyq-tAhAE_GvNgTIAUeW3f4k0N2CxuVPL9obWitxKzUvApZ1uNNUwcmzxkLX4dsDH1L21gpQdO6Q1F5w0g6YFm6Z0biO6cMbM34Oo4P3m6PMvfFViPqBnbojDeBMNA8TsnErpaaYH8i1eFbNre8UEA" alt="Sarah"/>
+                  <span className="text-sm font-bold text-on-surface">Sarah Jenkins</span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          {/* Mobile Top Header App Bar */}
+          <header className="md:hidden flex justify-between items-center px-margin-mobile h-16 bg-surface border-b border-surface-variant/30 sticky top-0 z-40 w-full shadow-sm">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigate('dashboard')}>
+              <img alt="Mind Care logo" className="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVO-aE9_a21aEW4sT-sPoi1rQ19hYVxT8BrkpBeuifi9bW-wyqKP0SMdApTB7AJ0UhF6SyCPlAHskvy_GYTdW2FGETXlEPbGvmlIhtce8XiXMC5aNJGMTu_WDkCEs5CDkGWauTYO8HIj9BnQPlMgWxh2qN133FvYMNVIRoxOj-gR8LXgqwGzgKqqmknR7tN-UsEhuR6_qimFLUJUX3rg5jmOzRaMKb5NuhA1vGVe36TlInLQR5wOXxwg"/>
+              <span className="font-bold text-primary text-lg">Mind Care</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <button onClick={() => handleNavigate('help_support')} className="text-on-surface-variant p-2 hover:bg-surface-container rounded-full">
+                <span className="material-symbols-outlined">help</span>
+              </button>
+              <img className="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT4_acYkpaqwuyRb0zbDwjmnnic1Zy-rL6Ktz7kbVXyjk7Sfv9u8H0OGcG9O3W3ip0wdVz9wuCn7p9HPoUi-O2IJ_D6gBtBH-hsyq-tAhAE_GvNgTIAUeW3f4k0N2CxuVPL9obWitxKzUvApZ1uNNUwcmzxkLX4dsDH1L21gpQdO6Q1F5w0g6YFm6Z0biO6cMbM34Oo4P3m6PMvfFViPqBnbojDeBMNA8TsnErpaaYH8i1eFbNre8UEA" alt="Sarah"/>
+            </div>
+          </header>
+
+          {/* Main Content Area */}
+          <main className="flex-grow w-full md:ml-64 pt-6 md:pt-28 px-margin-mobile md:px-margin-desktop pb-32 md:pb-20 max-w-container-max-width mx-auto animate-fade-in">
+            
+            {/* VIEW 1: Dashboard */}
+            {activeTab === 'dashboard' && (
+              <div className="space-y-10">
+                {/* Greeting & Mood check-in */}
+                <section className="bg-surface-container-low rounded-3xl p-6 md:p-8 border border-outline-variant/10 shadow-sm relative overflow-hidden">
+                  <div className="absolute right-0 bottom-0 w-48 h-48 bg-primary/5 rounded-tl-full -z-0 pointer-events-none translate-x-8 translate-y-8"></div>
+                  <div className="relative z-10">
+                    <h2 className="text-3xl font-bold text-on-surface md:text-4xl tracking-tight">Welcome back, Sarah</h2>
+                    <p className="text-on-surface-variant mt-2 text-lg">{moodMessage}</p>
+                    
+                    {/* Mood Chips */}
+                    <div className="flex gap-3 overflow-x-auto pb-2 mt-6 hide-scrollbar">
+                      {['Calm', 'Anxious', 'Tired', 'Focused'].map(mood => (
+                        <button
+                          key={mood}
+                          onClick={() => handleMoodSelect(mood)}
+                          className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 shadow-sm ${userMood === mood ? 'bg-primary text-on-primary transform scale-105' : 'bg-surface-container-lowest text-on-surface-variant hover:bg-secondary-container/20 border border-outline-variant/10'}`}>
+                          {mood === 'Calm' && '😌 '}
+                          {mood === 'Anxious' && '🥺 '}
+                          {mood === 'Tired' && '😴 '}
+                          {mood === 'Focused' && '🤓 '}
+                          {mood}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* Middle Section: Wellbeing Card + Upcoming Consultation Card */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Assessment Card */}
+                  <article className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start mb-6">
+                        <div className="w-12 h-12 rounded-2xl bg-primary-container/20 flex items-center justify-center text-primary shadow-inner">
+                          <span className="material-symbols-outlined text-2xl">spa</span>
+                        </div>
+                        <span className="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-xs font-bold uppercase tracking-wider">Clinical</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-on-surface mb-2">General Wellbeing Assessment</h3>
+                      <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
+                        A holistic evaluation of your mental, emotional, and physical health, providing a personalized baseline for your sanctuary journey.
+                      </p>
+                    </div>
+                    <button 
+                      onClick={() => handleNavigate('assessments')}
+                      className="w-full bg-primary text-on-primary py-3 rounded-full font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm flex items-center justify-center gap-2 group">
+                      Assess Wellbeing
+                      <span className="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
+                    </button>
+                  </article>
+
+                  {/* Consultation Card */}
+                  <article className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start mb-6">
+                        <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant border border-outline-variant/30 px-3 py-1 rounded-full">Upcoming Consultation</span>
+                        <span className="px-3 py-1 bg-error-container/30 text-error rounded-full text-xs font-bold uppercase tracking-wider">Today</span>
+                      </div>
+                      <div className="flex items-center gap-4 mb-6">
+                        <img className="w-16 h-16 rounded-full object-cover border-2 border-primary/20 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqY4POmUciCm4frH6QmphpnEJ9GA0qRk_syh8yis_b7nApJZPonVeM0D2XDR4GKiafKJGdGRLmYGuyAfreSxSWZ7CqSzb55yc7_gtT-xD_qzNyc1ZSiHXg0lS5Xf7w-OnaJMcrpwKE1aOP1IwZ2OETp7XpM9IpMoUJikyHSd8juYzSEs4dKSDq5Mh9M3dwBHrqKrS-EIBJbnQdC_JrFMudmDfdQGXbb_uKQoTCjZ25axB74z_uC5N6IA" alt="Dr. Ananya Sharma"/>
+                        <div>
+                          <h4 className="text-xl font-bold text-on-surface">Dr. Ananya Sharma</h4>
+                          <p className="text-sm text-on-surface-variant font-medium">Clinical Psychologist • 3:00 PM (1h)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <button 
+                        onClick={() => setShowVideoCall(true)}
+                        className="flex-1 py-3 bg-secondary text-on-secondary rounded-full font-bold hover:bg-secondary/95 transition-all duration-300 shadow-sm flex items-center justify-center gap-2">
+                        <span className="material-symbols-outlined">video_call</span>
+                        Join Call
+                      </button>
+                      <button 
+                        onClick={() => { setSelectedConsultant(initialConsultants[0]); handleNavigate('consultations'); }}
+                        className="flex-1 py-3 border border-outline-variant text-on-surface-variant rounded-full font-semibold hover:bg-surface-container-low transition-colors">
+                        Reschedule
+                      </button>
+                    </div>
+                  </article>
+                </div>
+
+                {/* Wellness Progress Chart & Activities Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* Chart (Col Span 5) */}
+                  <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm">
+                    <div className="flex justify-between items-center mb-6">
+                      <h3 className="text-lg font-bold text-on-surface">Weekly Balance</h3>
+                      <span className="text-xs font-semibold text-outline">Active Streak</span>
+                    </div>
+                    <div className="flex justify-between items-end h-36 gap-3 pb-2 border-b border-surface-container">
+                      {[
+                        { day: 'Mon', h: '40%', active: false },
+                        { day: 'Tue', h: '60%', active: false },
+                        { day: 'Wed', h: '30%', active: false },
+                        { day: 'Thu', h: '85%', active: true },
+                        { day: 'Fri', h: '50%', active: false }
+                      ].map((bar, i) => (
+                        <div key={i} className="flex flex-col items-center justify-end w-full gap-2 group cursor-pointer">
+                          <div className="relative w-full">
+                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                              {bar.h} Wellbeing
+                            </div>
+                          </div>
+                          <div 
+                            style={{ height: bar.h }} 
+                            className={`w-full rounded-t-lg transition-all duration-300 group-hover:opacity-90 ${bar.active ? 'bg-primary shadow-md' : 'bg-primary-container/30'}`}
+                          />
+                          <span className="text-xs text-on-surface-variant font-medium mt-1">{bar.day}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-2 mt-4 text-xs font-semibold text-on-surface-variant justify-center">
+                      <span className="w-2.5 h-2.5 bg-primary rounded-full"></span> Active Day
+                      <span className="w-2.5 h-2.5 bg-primary-container/30 rounded-full ml-3"></span> Completed Day
+                    </div>
+                  </div>
+
+                  {/* Recent Activity (Col Span 7) */}
+                  <div className="lg:col-span-7 bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm flex flex-col justify-between">
+                    <h3 className="text-lg font-bold text-on-surface mb-4">Recent Activity</h3>
+                    <ul className="space-y-3 flex-1 mb-4">
+                      <li className="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-xl transition-colors">
+                        <div className="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+                          <span className="material-symbols-outlined text-lg">self_improvement</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-sm font-bold text-on-surface">Completed Guided Meditation</h4>
+                          <p className="text-xs text-outline font-medium">10 mins • Focus &amp; Clarity</p>
+                        </div>
+                        <span className="text-xs text-outline">Yesterday</span>
+                      </li>
+                      <li className="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-xl transition-colors">
+                        <div className="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+                          <span className="material-symbols-outlined text-lg">edit_note</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-sm font-bold text-on-surface">Journal Entry Logged</h4>
+                          <p className="text-xs text-outline font-medium">Morning Sanctuary reflection</p>
+                        </div>
+                        <span className="text-xs text-outline">2 days ago</span>
+                      </li>
+                      <li className="flex items-center gap-4 p-3 hover:bg-surface-container-low rounded-xl transition-colors">
+                        <div className="w-10 h-10 rounded-full bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+                          <span className="material-symbols-outlined text-lg">article</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-sm font-bold text-on-surface">Read: Managing Work Stress</h4>
+                          <p className="text-xs text-outline font-medium">Article • 5 min read</p>
+                        </div>
+                        <span className="text-xs text-outline">3 days ago</span>
+                      </li>
+                    </ul>
+                    <button onClick={() => handleNavigate('track_record')} className="w-full text-center text-xs font-bold text-primary hover:underline">
+                      View Full Track Record
+                    </button>
+                  </div>
+                </div>
+
+                {/* Recommended Consultants */}
+                <section className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm">
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-2xl font-bold text-on-surface">Recommended Specialists</h3>
+                    <button onClick={() => handleNavigate('consultations')} className="text-sm font-bold text-primary hover:underline">
+                      View All
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {initialConsultants.map(c => (
+                      <div key={c.id} className="bg-surface rounded-xl p-5 border border-outline-variant/20 hover:border-primary/20 transition-all duration-300 card-lift">
+                        <div className="flex items-center gap-4 mb-4">
+                          <img alt={c.name} className="w-12 h-12 rounded-full object-cover border border-surface-variant" src={c.imageUrl}/>
+                          <div>
+                            <h4 className="text-sm font-bold text-on-surface">{c.name}</h4>
+                            <p className="text-xs text-outline font-medium">{c.title}</p>
+                          </div>
+                        </div>
+                        <div className="flex gap-2 mb-4 flex-wrap">
+                          {c.specialties.map(s => (
+                            <span key={s} className="px-2 py-0.5 bg-surface-container rounded text-[9px] text-on-surface-variant font-bold uppercase tracking-wider">{s}</span>
+                          ))}
+                        </div>
+                        <button 
+                          onClick={() => { setSelectedConsultant(c); handleNavigate('consultations'); }}
+                          className="w-full py-2 bg-secondary-container/20 text-on-secondary-container rounded-lg text-xs font-bold hover:bg-secondary-container/40 transition-colors">
+                          View Profile
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {/* VIEW 2: Assessments */}
+            {activeTab === 'assessments' && (
+              <div className="space-y-10">
+                {/* Header */}
+                <section className="bg-surface-container-low rounded-3xl p-6 md:p-8 border border-outline-variant/10 shadow-sm">
+                  <h2 className="text-3xl font-bold text-on-surface md:text-4xl tracking-tight">Available Assessments</h2>
+                  <p className="text-on-surface-variant mt-2 text-base max-w-2xl leading-relaxed">
+                    Take a moment for yourself. Our clinical-grade assessments are designed to provide gentle insights into your current mental wellbeing. Choose a focus area below to begin.
+                  </p>
+                </section>
+
+                {activeAssessment ? (
+                  /* Interactive Quiz Screen */
+                  <section className="bg-white rounded-3xl p-6 md:p-8 border border-surface-container-highest shadow-md max-w-xl mx-auto animate-slide-up">
+                    <div className="flex justify-between items-center mb-6">
+                      <span className="text-xs font-bold uppercase tracking-wider text-primary bg-primary-container/20 px-3 py-1 rounded-full">
+                        Question {quizStep + 1} of {anxietyQuiz.questions.length}
+                      </span>
+                      <button onClick={() => setActiveAssessment(null)} className="text-on-surface-variant hover:text-error transition-colors p-1 hover:bg-surface-container rounded-full">
+                        <span className="material-symbols-outlined text-lg">close</span>
+                      </button>
+                    </div>
+
+                    {!quizResult ? (
+                      /* Quiz In-Progress */
+                      <div>
+                        <h3 className="text-xl font-bold text-on-surface mb-2">{anxietyQuiz.title}</h3>
+                        <p className="text-sm text-on-surface-variant mb-8 leading-relaxed font-medium">{anxietyQuiz.subtitle}</p>
+                        
+                        <div className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/20 mb-8 min-h-[100px] flex items-center justify-center">
+                          <h4 className="text-lg font-semibold text-on-surface text-center leading-relaxed">
+                            "{anxietyQuiz.questions[quizStep]}"
+                          </h4>
+                        </div>
+
+                        <div className="space-y-3">
+                          {anxietyQuiz.options.map((opt, i) => (
+                            <button
+                              key={i}
+                              onClick={() => handleSelectQuizOption(opt.score)}
+                              className="w-full text-left p-4 bg-surface rounded-xl border border-outline-variant/30 hover:border-primary hover:bg-secondary-container/20 font-medium transition-all duration-200 active:scale-[0.99] flex justify-between items-center shadow-sm">
+                              <span>{opt.text}</span>
+                              <span className="material-symbols-outlined text-outline text-lg">arrow_forward</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      /* Quiz Result Screen */
+                      <div className="text-center animate-fade-in">
+                        <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                          <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                        </div>
+                        <h3 className="text-2xl font-bold text-on-surface mb-2">Assessment Complete</h3>
+                        <p className="text-sm text-outline mb-6">Your responses have been processed.</p>
+                        
+                        <div className="bg-surface-container-low border border-outline-variant/20 rounded-2xl p-6 mb-8 text-center max-w-sm mx-auto">
+                          <div className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">Anxiety Level Score</div>
+                          <div className="text-4xl font-extrabold text-primary mb-2">{quizResult.score} / 21</div>
+                          <span className="px-3.5 py-1 bg-primary text-on-primary rounded-full text-xs font-bold uppercase tracking-wider">
+                            {quizResult.severity} Anxiety
+                          </span>
+                        </div>
+
+                        <p className="text-sm text-on-surface-variant leading-relaxed max-w-md mx-auto mb-8 font-medium">
+                          {quizResult.recommendation}
+                        </p>
+
+                        <div className="flex gap-4">
+                          <button 
+                            onClick={handleSaveQuizResults}
+                            className="flex-1 py-3 bg-primary text-on-primary rounded-full font-bold hover:bg-primary/95 transition-all duration-300 shadow-md">
+                            Save Results &amp; View Trends
+                          </button>
+                          <button 
+                            onClick={() => setActiveAssessment(null)}
+                            className="px-6 py-3 border border-outline-variant text-on-surface-variant rounded-full font-semibold hover:bg-surface-container-low transition-colors">
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </section>
+                ) : (
+                  /* Assessment List Grid */
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Test 1 */}
+                    <article className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-300 card-lift flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start mb-6">
+                          <div className="w-12 h-12 rounded-xl bg-error-container/20 flex items-center justify-center text-error">
+                            <span className="material-symbols-outlined text-2xl">vital_signs</span>
+                          </div>
+                          <span className="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Daily</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-on-surface mb-2">Stress Check</h3>
+                        <p className="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                          Evaluate your current stress levels and identify potential triggers affecting your daily equilibrium.
+                        </p>
+                      </div>
+                      <div className="flex justify-between items-center mt-auto">
+                        <div className="flex items-center gap-1.5 text-xs text-outline font-semibold bg-surface-container-low px-2.5 py-1 rounded-md">
+                          <span className="material-symbols-outlined text-sm">timer</span>
+                          5 mins
+                        </div>
+                        <button 
+                          onClick={() => startQuiz('stress_check')}
+                          className="bg-primary text-on-primary px-5 py-2 rounded-full text-xs font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm flex items-center gap-1">
+                          Start Test
+                        </button>
+                      </div>
+                    </article>
+
+                    {/* Test 2: Anxiety Check (Fully interactive GAD-7) */}
+                    <article className="bg-white rounded-2xl p-6 border border-primary/20 shadow-md hover:shadow-lg transition-all duration-300 card-lift flex flex-col justify-between ring-2 ring-primary/10">
+                      <div>
+                        <div className="flex justify-between items-start mb-6">
+                          <div className="w-12 h-12 rounded-xl bg-secondary-container/50 flex items-center justify-center text-secondary">
+                            <span className="material-symbols-outlined text-2xl">monitor_heart</span>
+                          </div>
+                          <span className="px-3 py-1 bg-primary text-on-primary rounded-full text-[10px] font-bold uppercase tracking-wider">Recommended</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-on-surface mb-2">Anxiety Check (GAD-7)</h3>
+                        <p className="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                          A clinical-grade assessment to help understand and monitor your anxiety symptoms over the past two weeks.
+                        </p>
+                      </div>
+                      <div className="flex justify-between items-center mt-auto">
+                        <div className="flex items-center gap-1.5 text-xs text-outline font-semibold bg-surface-container-low px-2.5 py-1 rounded-md">
+                          <span className="material-symbols-outlined text-sm">timer</span>
+                          8 mins
+                        </div>
+                        <button 
+                          onClick={() => startQuiz('anxiety_check')}
+                          className="bg-primary text-on-primary px-6 py-2.5 rounded-full text-xs font-bold hover:bg-primary/95 transition-all duration-300 shadow-md flex items-center gap-1">
+                          Start Test
+                        </button>
+                      </div>
+                    </article>
+
+                    {/* Test 3 */}
+                    <article className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-300 card-lift flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start mb-6">
+                          <div className="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary">
+                            <span className="material-symbols-outlined text-2xl">mood</span>
+                          </div>
+                          <span className="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Daily</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-on-surface mb-2">Mood Check</h3>
+                        <p className="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                          Track your emotional state over daily intervals and uncover patterns in your mood fluctuations.
+                        </p>
+                      </div>
+                      <div className="flex justify-between items-center mt-auto">
+                        <div className="flex items-center gap-1.5 text-xs text-outline font-semibold bg-surface-container-low px-2.5 py-1 rounded-md">
+                          <span className="material-symbols-outlined text-sm">timer</span>
+                          3 mins
+                        </div>
+                        <button 
+                          onClick={() => startQuiz('mood_check')}
+                          className="bg-primary text-on-primary px-5 py-2 rounded-full text-xs font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm flex items-center gap-1">
+                          Start Test
+                        </button>
+                      </div>
+                    </article>
+
+                    {/* Test 4 */}
+                    <article className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-300 card-lift flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start mb-6">
+                          <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-700">
+                            <span className="material-symbols-outlined text-2xl">bedtime</span>
+                          </div>
+                          <span className="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Lifestyle</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-on-surface mb-2">Sleep &amp; Wellness</h3>
+                        <p className="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                          Analyze your sleep quality, schedules, and sleep hygiene routines to improve your restorative rest.
+                        </p>
+                      </div>
+                      <div className="flex justify-between items-center mt-auto">
+                        <div className="flex items-center gap-1.5 text-xs text-outline font-semibold bg-surface-container-low px-2.5 py-1 rounded-md">
+                          <span className="material-symbols-outlined text-sm">timer</span>
+                          7 mins
+                        </div>
+                        <button 
+                          onClick={() => startQuiz('sleep_wellness')}
+                          className="bg-primary text-on-primary px-5 py-2 rounded-full text-xs font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm flex items-center gap-1">
+                          Start Test
+                        </button>
+                      </div>
+                    </article>
+
+                    {/* Test 5 */}
+                    <article className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm hover:shadow-md transition-all duration-300 card-lift flex flex-col justify-between md:col-span-2 relative overflow-hidden">
+                      <div className="absolute right-0 bottom-0 w-64 h-64 bg-primary-fixed rounded-tl-full opacity-10 -z-0 pointer-events-none translate-x-12 translate-y-12"></div>
+                      <div className="relative z-10 flex flex-col h-full justify-between">
+                        <div>
+                          <div className="flex justify-between items-start mb-6">
+                            <div className="w-12 h-12 rounded-xl bg-surface-tint flex items-center justify-center text-on-primary shadow-sm">
+                              <span className="material-symbols-outlined text-2xl">spa</span>
+                            </div>
+                            <span className="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-wider">Comprehensive</span>
+                          </div>
+                          <h3 className="text-xl font-bold text-on-surface mb-2">General Wellbeing Overview</h3>
+                          <p className="text-sm text-on-surface-variant mb-6 leading-relaxed max-w-lg">
+                            A holistic evaluation of your mental, emotional, and physical health, providing a baseline for your personal sanctuary journey.
+                          </p>
+                        </div>
+                        <div className="flex justify-between items-center mt-auto">
+                          <div className="flex items-center gap-1.5 text-xs text-outline font-semibold bg-surface-container-low px-2.5 py-1 rounded-md">
+                            <span className="material-symbols-outlined text-sm">timer</span>
+                            15 mins
+                          </div>
+                          <button 
+                            onClick={() => startQuiz('general_wellbeing')}
+                            className="bg-primary text-on-primary px-6 py-2.5 rounded-full text-xs font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm flex items-center gap-1">
+                            Start Comprehensive Test
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* VIEW 3: Track Record */}
+            {activeTab === 'track_record' && (
+              <div className="space-y-10">
+                {/* Header */}
+                <section className="bg-surface-container-low rounded-3xl p-6 md:p-8 border border-outline-variant/10 shadow-sm">
+                  <h2 className="text-3xl font-bold text-on-surface md:text-4xl tracking-tight">Wellness Track Record</h2>
+                  <p className="text-on-surface-variant mt-2 text-base max-w-2xl leading-relaxed">
+                    Review your progress, streak accomplishments, mood records, and recent milestones.
+                  </p>
+                </section>
+
+                {/* Stats grid */}
+                <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm flex items-center justify-between">
+                    <div>
+                      <h4 className="text-sm font-bold text-outline uppercase tracking-wider">Consultations</h4>
+                      <div className="text-4xl font-extrabold text-primary mt-2">12</div>
+                      <p className="text-xs text-on-surface-variant font-medium mt-1">Sessions attended</p>
+                    </div>
+                    <div className="w-12 h-12 bg-secondary-container/30 text-secondary rounded-full flex items-center justify-center">
+                      <span className="material-symbols-outlined text-2xl">forum</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm flex items-center justify-between">
+                    <div>
+                      <h4 className="text-sm font-bold text-outline uppercase tracking-wider">Assessments</h4>
+                      <div className="text-4xl font-extrabold text-primary mt-2">{completedTestsCount}</div>
+                      <p className="text-xs text-on-surface-variant font-medium mt-1">Completed tests</p>
+                    </div>
+                    <div className="w-12 h-12 bg-primary-container/20 text-primary rounded-full flex items-center justify-center">
+                      <span className="material-symbols-outlined text-2xl">assignment</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-primary text-on-primary rounded-2xl p-6 shadow-sm flex items-center justify-between">
+                    <div>
+                      <h4 className="text-sm font-bold opacity-80 uppercase tracking-wider">Current Streak</h4>
+                      <div className="text-4xl font-extrabold mt-2">{streakDays} Days</div>
+                      <p className="text-xs opacity-90 font-medium mt-1">Continuous self-reflection!</p>
+                    </div>
+                    <div className="w-12 h-12 bg-white/20 text-white rounded-full flex items-center justify-center animate-pulse">
+                      <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>local_fire_department</span>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Graph & Milestones layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* Mood Trends Chart (Col Span 7) */}
+                  <div className="lg:col-span-7 bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm">
+                    <div className="flex justify-between items-center mb-6">
+                      <h3 className="text-lg font-bold text-on-surface">30-Day Mood Trends</h3>
+                      <select className="bg-surface-container-low border-none rounded-full py-1.5 px-4 text-xs font-bold text-on-surface-variant focus:ring-1 focus:ring-primary outline-none cursor-pointer">
+                        <option>Last 30 Days</option>
+                        <option>Last 3 Months</option>
+                      </select>
+                    </div>
+                    
+                    {/* SVG Graph container */}
+                    <div className="relative h-[220px] w-full flex items-end">
+                      {/* Chart lines */}
+                      <div className="absolute inset-0 flex flex-col justify-between border-l border-b border-surface-container-highest pb-6 pl-8">
+                        <div className="w-full border-t border-surface-container/50 h-0"></div>
+                        <div className="w-full border-t border-surface-container/50 h-0"></div>
+                        <div className="w-full border-t border-surface-container/50 h-0"></div>
+                        <div className="w-full border-t border-surface-container/50 h-0"></div>
+                      </div>
+                      
+                      {/* Y-Axis labels */}
+                      <div className="absolute left-0 top-0 h-[196px] flex flex-col justify-between text-[10px] text-outline font-bold">
+                        <span>Good</span>
+                        <span>Neutral</span>
+                        <span>Low</span>
+                      </div>
+
+                      {/* X-Axis labels */}
+                      <div className="absolute bottom-0 left-8 right-0 flex justify-between text-[10px] text-outline font-bold pt-2">
+                        <span>Oct 1</span>
+                        <span>Oct 15</span>
+                        <span>Oct 30</span>
+                      </div>
+
+                      {/* SVG Chart curve */}
+                      <svg className="absolute inset-0 h-[196px] w-[calc(100%-2rem)] left-8 top-0 overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#8daa91" stopOpacity="0.4"></stop>
+                            <stop offset="100%" stopColor="#8daa91" stopOpacity="0"></stop>
+                          </linearGradient>
+                        </defs>
+                        {/* Fill */}
+                        <path d="M0,80 C15,80 25,50 45,40 C65,30 75,60 100,20 L100,100 L0,100 Z" fill="url(#chartGradient)"></path>
+                        {/* Curve Line */}
+                        <path d="M0,80 C15,80 25,50 45,40 C65,30 75,60 100,20" fill="none" stroke="#4a654f" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                        
+                        {/* Points */}
+                        <circle cx="0" cy="80" r="1.5" fill="#4a654f"></circle>
+                        <circle cx="25" cy="53" r="1.5" fill="#4a654f"></circle>
+                        <circle cx="45" cy="40" r="2" fill="#ffffff" stroke="#4a654f" strokeWidth="1"></circle>
+                        <circle cx="70" cy="47" r="1.5" fill="#4a654f"></circle>
+                        <circle cx="100" cy="20" r="2" fill="#ffffff" stroke="#4a654f" strokeWidth="1"></circle>
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Milestones timeline (Col Span 5) */}
+                  <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-surface-container-highest shadow-sm">
+                    <h3 className="text-lg font-bold text-on-surface mb-6">Recent Milestones</h3>
+                    <div className="relative pl-6 border-l-2 border-surface-container space-y-6">
+                      {milestones.map(m => (
+                        <div key={m.id} className="relative group">
+                          {/* Milestone badge node */}
+                          <div className={`absolute -left-[35px] top-0.5 rounded-full p-1 flex items-center justify-center border-4 border-white ${m.isPrimary ? 'bg-primary text-on-primary shadow-sm' : 'bg-surface-container-high text-on-surface-variant'}`}>
+                            <span className="material-symbols-outlined text-sm">{m.icon}</span>
+                          </div>
+                          <div>
+                            <span className="text-[10px] font-bold text-outline block mb-0.5">{m.date}</span>
+                            <h4 className="text-sm font-bold text-on-surface">{m.title}</h4>
+                            <p className="text-xs text-on-surface-variant mt-0.5 leading-relaxed font-medium">{m.detail}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 4: Consultations (and booking flows) */}
+            {activeTab === 'consultations' && (
+              <div className="space-y-10">
+                {/* Conditional Flow rendering */}
+                {paymentSuccess ? (
+                  /* Success confirmation Screen */
+                  <div className="max-w-md mx-auto text-center bg-white rounded-3xl p-8 border border-outline-variant/20 shadow-md animate-fade-in">
+                    <div className="w-16 h-16 bg-primary-fixed-dim text-primary rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner animate-bounce">
+                      <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-on-surface mb-2">Booking Confirmed!</h3>
+                    <p className="text-sm text-outline mb-6">Your session with {selectedConsultant.name} is successfully scheduled.</p>
+                    
+                    <div className="bg-surface-container-low border border-outline-variant/10 rounded-2xl p-5 mb-8 text-left space-y-3">
+                      <div className="flex justify-between text-xs font-semibold border-b border-surface-container pb-2">
+                        <span className="text-outline">Specialist:</span>
+                        <span className="text-on-surface">{selectedConsultant.name}</span>
+                      </div>
+                      <div className="flex justify-between text-xs font-semibold border-b border-surface-container pb-2">
+                        <span className="text-outline">Date &amp; Time:</span>
+                        <span className="text-on-surface">{bookingDate}, {bookingTime}</span>
+                      </div>
+                      <div className="flex justify-between text-xs font-semibold border-b border-surface-container pb-2">
+                        <span className="text-outline">Format:</span>
+                        <span className="text-on-surface">{sessionFormat}</span>
+                      </div>
+                      <div className="flex justify-between text-xs font-semibold">
+                        <span className="text-outline">Status:</span>
+                        <span className="text-primary font-bold">Paid &amp; Approved</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <button 
+                        onClick={() => handleNavigate('dashboard')}
+                        className="w-full py-3 bg-primary text-on-primary rounded-full font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm">
+                        Return to Dashboard
+                      </button>
+                      <button 
+                        onClick={() => handleNavigate('track_record')}
+                        className="w-full py-3 border border-outline-variant text-on-surface-variant rounded-full font-semibold hover:bg-surface-container-low transition-colors">
+                        Check Track Record
+                      </button>
+                    </div>
+                  </div>
+                ) : bookingState === 'payment' ? (
+                  /* Payment checkout Screen */
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-4xl mx-auto items-start animate-slide-up">
+                    {/* Checkout form (Col Span 7) */}
+                    <div className="lg:col-span-7 bg-white rounded-3xl p-6 md:p-8 border border-outline-variant/10 shadow-md">
+                      <div className="flex items-center gap-2 mb-6">
+                        <button onClick={() => setBookingState('details')} className="text-outline hover:text-primary transition-colors p-1.5 hover:bg-surface-container rounded-full">
+                          <span className="material-symbols-outlined text-lg">arrow_back</span>
+                        </button>
+                        <h3 className="text-2xl font-bold text-on-surface">Payment Method</h3>
+                      </div>
+
+                      <form onSubmit={handlePayConfirm} className="space-y-4">
+                        <div>
+                          <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-2">Card Number</label>
+                          <input 
+                            type="text" 
+                            maxLength={16}
+                            placeholder="4111 2222 3333 4444"
+                            value={paymentCard.number}
+                            onChange={(e) => setPaymentCard({ ...paymentCard, number: e.target.value.replace(/\D/g, '') })}
+                            className={`w-full p-3 rounded-xl border ${paymentErrors.number ? 'border-error' : 'border-outline-variant'} focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all`}
+                          />
+                          {paymentErrors.number && <p className="text-error text-[11px] font-bold mt-1">{paymentErrors.number}</p>}
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-2">Expiry Date</label>
+                            <input 
+                              type="text" 
+                              placeholder="MM/YY"
+                              maxLength={5}
+                              value={paymentCard.expiry}
+                              onChange={(e) => setPaymentCard({ ...paymentCard, expiry: e.target.value })}
+                              className={`w-full p-3 rounded-xl border ${paymentErrors.expiry ? 'border-error' : 'border-outline-variant'} focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all`}
+                            />
+                            {paymentErrors.expiry && <p className="text-error text-[11px] font-bold mt-1">{paymentErrors.expiry}</p>}
+                          </div>
+                          <div>
+                            <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-2">CVV</label>
+                            <input 
+                              type="password" 
+                              maxLength={4}
+                              placeholder="***"
+                              value={paymentCard.cvv}
+                              onChange={(e) => setPaymentCard({ ...paymentCard, cvv: e.target.value.replace(/\D/g, '') })}
+                              className={`w-full p-3 rounded-xl border ${paymentErrors.cvv ? 'border-error' : 'border-outline-variant'} focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all`}
+                            />
+                            {paymentErrors.cvv && <p className="text-error text-[11px] font-bold mt-1">{paymentErrors.cvv}</p>}
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-2">Cardholder Name</label>
+                          <input 
+                            type="text" 
+                            placeholder="Sarah Jenkins"
+                            value={paymentCard.name}
+                            onChange={(e) => setPaymentCard({ ...paymentCard, name: e.target.value })}
+                            className={`w-full p-3 rounded-xl border ${paymentErrors.name ? 'border-error' : 'border-outline-variant'} focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all`}
+                          />
+                          {paymentErrors.name && <p className="text-error text-[11px] font-bold mt-1">{paymentErrors.name}</p>}
+                        </div>
+
+                        <div className="pt-6 border-t border-surface-container mt-6">
+                          <button 
+                            type="submit" 
+                            className="w-full bg-primary text-on-primary py-3.5 rounded-full font-bold hover:bg-primary/95 transition-all duration-300 shadow-md">
+                            Pay &amp; Confirm Booking
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+
+                    {/* Session summary sidebar (Col Span 5) */}
+                    <div className="lg:col-span-5 bg-white rounded-3xl p-6 border border-outline-variant/10 shadow-md space-y-6">
+                      <h3 className="text-lg font-bold text-on-surface">Session Summary</h3>
+                      <div className="flex items-center gap-3">
+                        <img className="w-12 h-12 rounded-full object-cover border border-surface-variant shadow-sm" src={selectedConsultant.imageUrl} alt={selectedConsultant.name}/>
+                        <div>
+                          <h4 className="text-sm font-bold text-on-surface">{selectedConsultant.name}</h4>
+                          <p className="text-xs text-outline font-medium">{selectedConsultant.title}</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-surface rounded-2xl p-4 border border-outline-variant/20 space-y-3">
+                        <div className="flex items-center gap-3 text-xs font-semibold text-on-surface-variant">
+                          <span className="material-symbols-outlined text-primary text-base">calendar_today</span>
+                          <span>{bookingDate}, {bookingTime}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs font-semibold text-on-surface-variant">
+                          <span className="material-symbols-outlined text-primary text-base">video_call</span>
+                          <span>{sessionFormat}</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-xs font-semibold text-on-surface-variant">
+                          <span className="material-symbols-outlined text-primary text-base">timer</span>
+                          <span>{sessionDuration} Minutes</span>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-surface-container space-y-3">
+                        <div className="flex justify-between text-xs font-semibold text-outline">
+                          <span>Standard Rate:</span>
+                          <span>${sessionDuration === 30 ? selectedConsultant.cost / 2 : selectedConsultant.cost}.00</span>
+                        </div>
+                        {discountPercent > 0 && (
+                          <div className="flex justify-between text-xs font-semibold text-primary">
+                            <span>Promo Code Applied ({discountPercent}%):</span>
+                            <span>-${(sessionDuration === 30 ? selectedConsultant.cost / 2 : selectedConsultant.cost) * (discountPercent / 100)}.00</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between text-base font-extrabold text-on-surface pt-2 border-t border-dashed border-surface-container">
+                          <span>Total Amount:</span>
+                          <span>
+                            ${(sessionDuration === 30 ? selectedConsultant.cost / 2 : selectedConsultant.cost) * (1 - discountPercent / 100)}.00
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Promo Input */}
+                      <div className="pt-4 border-t border-surface-container">
+                        <label className="block text-[10px] font-bold text-outline uppercase tracking-wider mb-1.5">Apply Promo Code</label>
+                        <div className="flex gap-2">
+                          <input 
+                            type="text" 
+                            placeholder="Try: MINDCARE10" 
+                            value={promoCode}
+                            onChange={(e) => setPromoCode(e.target.value)}
+                            className="flex-1 p-2 rounded-xl border border-outline-variant focus:ring-1 focus:ring-primary outline-none text-xs"
+                          />
+                          <button 
+                            type="button"
+                            onClick={handleApplyPromo}
+                            className="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-xl text-xs font-bold hover:bg-secondary-container/80 transition-colors">
+                            Apply
+                          </button>
+                        </div>
+                        {promoError && <p className="text-error text-[10px] font-bold mt-1">{promoError}</p>}
+                        {discountPercent > 0 && <p className="text-primary text-[10px] font-bold mt-1">10% discount successfully applied!</p>}
+                      </div>
+                    </div>
+                  </div>
+                ) : bookingState === 'details' ? (
+                  /* Consultation Booking Details Form Screen */
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-4xl mx-auto items-start animate-slide-up">
+                    {/* Form inputs (Col Span 7) */}
+                    <div className="lg:col-span-7 bg-white rounded-3xl p-6 md:p-8 border border-outline-variant/10 shadow-md">
+                      <div className="flex items-center gap-2 mb-6">
+                        <button onClick={() => setBookingState(null)} className="text-outline hover:text-primary transition-colors p-1.5 hover:bg-surface-container rounded-full">
+                          <span className="material-symbols-outlined text-lg">arrow_back</span>
+                        </button>
+                        <h3 className="text-2xl font-bold text-on-surface">Consultation Details</h3>
+                      </div>
+
+                      <div className="space-y-6">
+                        {/* Session format selection */}
+                        <div>
+                          <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-3">Session Format</label>
+                          <div className="grid grid-cols-3 gap-3">
+                            {[
+                              { name: 'Video call', icon: 'video_call' },
+                              { name: 'Audio call', icon: 'call' },
+                              { name: 'Text chat', icon: 'chat' }
+                            ].map(format => (
+                              <button
+                                key={format.name}
+                                type="button"
+                                onClick={() => setSessionFormat(format.name)}
+                                className={`p-3 rounded-xl border flex flex-col items-center gap-2 text-xs font-bold transition-all duration-200 ${sessionFormat === format.name ? 'border-primary bg-secondary-container/20 text-primary shadow-sm' : 'border-outline-variant/30 hover:border-primary/50 text-on-surface-variant'}`}>
+                                <span className="material-symbols-outlined text-xl">{format.icon}</span>
+                                <span>{format.name}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Session duration selection */}
+                        <div>
+                          <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-3">Session Duration</label>
+                          <div className="grid grid-cols-2 gap-4">
+                            {[
+                              { min: 30, price: selectedConsultant.cost / 2 },
+                              { min: 60, price: selectedConsultant.cost }
+                            ].map(dur => (
+                              <button
+                                key={dur.min}
+                                type="button"
+                                onClick={() => setSessionDuration(dur.min)}
+                                className={`p-4 rounded-xl border flex flex-col items-center justify-center gap-1 text-xs font-bold transition-all duration-200 ${sessionDuration === dur.min ? 'border-primary bg-secondary-container/20 text-primary shadow-sm' : 'border-outline-variant/30 hover:border-primary/50 text-on-surface-variant'}`}>
+                                <span className="text-lg font-bold">{dur.min} Minutes</span>
+                                <span className="text-outline font-medium">${dur.price} Session rate</span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Reason for session text field */}
+                        <div>
+                          <label className="block text-xs font-bold text-outline uppercase tracking-wider mb-2">Reason for Consultation (Optional)</label>
+                          <textarea
+                            rows="4"
+                            placeholder="Please describe any feelings or specific areas you would like to discuss (e.g. stress, work anxiety, sleep patterns)..."
+                            value={sessionReason}
+                            onChange={(e) => setSessionReason(e.target.value)}
+                            className="w-full p-3 rounded-xl border border-outline-variant focus:ring-1 focus:ring-primary focus:border-primary outline-none text-sm transition-all"
+                          />
+                        </div>
+
+                        <div className="pt-6 border-t border-surface-container mt-6">
+                          <button 
+                            onClick={() => setBookingState('payment')}
+                            className="w-full bg-primary text-on-primary py-3.5 rounded-full font-bold hover:bg-primary/95 transition-all duration-300 shadow-md flex items-center justify-center gap-2 group">
+                            Proceed to Payment
+                            <span className="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Sidebar details */}
+                    <div className="lg:col-span-5 bg-white rounded-3xl p-6 border border-outline-variant/10 shadow-md space-y-6">
+                      <h3 className="text-lg font-bold text-on-surface">Review Details</h3>
+                      <div className="flex items-center gap-4">
+                        <img className="w-16 h-16 rounded-full object-cover border border-surface-variant" src={selectedConsultant.imageUrl} alt={selectedConsultant.name}/>
+                        <div>
+                          <h4 className="text-lg font-bold text-on-surface">{selectedConsultant.name}</h4>
+                          <p className="text-xs text-outline font-medium mb-1">{selectedConsultant.title}</p>
+                          <div className="flex items-center text-primary font-bold text-xs">
+                            <span className="material-symbols-outlined mr-0.5 text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                            {selectedConsultant.rating}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="bg-surface rounded-2xl p-4 border border-outline-variant/20 space-y-3 text-xs font-semibold text-on-surface-variant">
+                        <div className="flex justify-between border-b border-surface-container pb-2">
+                          <span className="text-outline">Date:</span>
+                          <span>{bookingDate}</span>
+                        </div>
+                        <div className="flex justify-between border-b border-surface-container pb-2">
+                          <span className="text-outline">Time:</span>
+                          <span>{bookingTime}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-outline">Price Rate:</span>
+                          <span>${selectedConsultant.cost} / hr</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* Consultant Profile Screen (Dr. Ananya Sharma details) */
+                  <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-slide-up">
+                    
+                    {/* Profile detail details (Col Span 7) */}
+                    <div className="lg:col-span-7 bg-white rounded-3xl p-6 md:p-8 border border-outline-variant/10 shadow-md space-y-8">
+                      
+                      {/* Hero Header */}
+                      <div className="flex flex-col items-center text-center pb-6 border-b border-surface-container">
+                        <div className="w-28 h-28 rounded-full overflow-hidden mb-4 shadow-sm border-4 border-surface-container-highest">
+                          <img className="w-full h-full object-cover" src={selectedConsultant.imageUrl} alt={selectedConsultant.name}/>
+                        </div>
+                        <h2 className="text-2xl font-bold text-on-surface">{selectedConsultant.name}</h2>
+                        <p className="text-sm font-semibold text-tertiary mt-1">{selectedConsultant.title}</p>
+                        
+                        {/* Specialty tags */}
+                        <div className="flex flex-wrap justify-center gap-2 mt-4">
+                          {selectedConsultant.specialties.map(tag => (
+                            <span key={tag} className="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-semibold">{tag}</span>
+                          ))}
+                        </div>
+
+                        {/* Quick reviews info */}
+                        <div className="flex justify-around items-center w-full max-w-sm text-center mt-6 text-on-surface-variant text-xs font-semibold">
+                          <div>
+                            <div className="flex items-center justify-center text-primary font-bold mb-0.5">
+                              <span className="material-symbols-outlined text-sm mr-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+                              {selectedConsultant.rating}
+                            </div>
+                            <span className="text-[10px] text-outline uppercase font-bold tracking-wider">{selectedConsultant.reviews} Reviews</span>
+                          </div>
+                          <div className="w-px h-6 bg-surface-container-highest"></div>
+                          <div>
+                            <div className="text-on-surface font-bold mb-0.5">{selectedConsultant.experience}</div>
+                            <span className="text-[10px] text-outline uppercase font-bold tracking-wider">Experience</span>
+                          </div>
+                          <div className="w-px h-6 bg-surface-container-highest"></div>
+                          <div>
+                            <div className="text-on-surface font-bold mb-0.5">{selectedConsultant.languages.split(',')[0]}</div>
+                            <span className="text-[10px] text-outline uppercase font-bold tracking-wider">Languages</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bio details */}
+                      <div>
+                        <h3 className="text-lg font-bold text-on-surface mb-3">About specialist</h3>
+                        <p className="text-sm text-on-surface-variant leading-relaxed font-medium">
+                          {selectedConsultant.bio}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Booking schedule calendar (Col Span 5) */}
+                    <div className="lg:col-span-5 bg-white rounded-3xl p-6 border border-outline-variant/10 shadow-md space-y-6">
+                      <div>
+                        <h3 className="text-lg font-bold text-on-surface mb-1">Select a Session</h3>
+                        <p className="text-xs text-outline font-medium">Pick an available date and time slot</p>
+                      </div>
+
+                      {/* Date picker */}
+                      <div>
+                        <h4 className="text-xs font-bold text-outline uppercase tracking-wider mb-3">Available Dates</h4>
+                        <div className="flex space-x-2.5 overflow-x-auto pb-2 hide-scrollbar">
+                          {['Oct 12', 'Oct 13', 'Oct 14', 'Oct 15'].map(date => (
+                            <button
+                              key={date}
+                              onClick={() => setBookingDate(date)}
+                              className={`flex-shrink-0 w-16 h-20 rounded-xl flex flex-col items-center justify-center transition-all duration-200 shadow-sm border active:scale-95 ${bookingDate === date ? 'bg-primary border-primary text-on-primary transform scale-105' : 'bg-surface-container-lowest border-outline-variant/20 hover:border-primary/50 text-on-surface-variant'}`}>
+                              <span className="text-[10px] uppercase font-bold opacity-80">Oct</span>
+                              <span className="text-lg font-bold mt-0.5">{date.split(' ')[1]}</span>
+                              <span className="text-[10px] mt-0.5 font-semibold">
+                                {date === 'Oct 12' && 'Tue'}
+                                {date === 'Oct 13' && 'Wed'}
+                                {date === 'Oct 14' && 'Thu'}
+                                {date === 'Oct 15' && 'Fri'}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Time slot picker */}
+                      <div>
+                        <h4 className="text-xs font-bold text-outline uppercase tracking-wider mb-3">Available Times</h4>
+                        <div className="grid grid-cols-2 gap-3.5">
+                          {['9:00 AM', '11:00 AM', '3:00 PM', '5:00 PM'].map(time => (
+                            <button
+                              key={time}
+                              onClick={() => setBookingTime(time)}
+                              className={`py-3.5 px-4 rounded-xl text-center text-xs font-bold border transition-all duration-200 active:scale-95 ${bookingTime === time ? 'bg-secondary border-secondary text-on-secondary shadow-sm transform scale-[1.02]' : 'bg-surface-container-lowest border-outline-variant/20 hover:border-primary/50 text-on-surface-variant'}`}>
+                              {time}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Action button */}
+                      <div className="pt-4 border-t border-surface-container">
+                        <button 
+                          onClick={() => setBookingState('details')}
+                          className="w-full bg-primary text-on-primary py-3.5 rounded-full font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm flex items-center justify-center gap-2 group">
+                          Book Consultation
+                          <span className="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* VIEW 5: Help & Support */}
+            {activeTab === 'help_support' && (
+              <div className="space-y-10">
+                {/* Header / FAQ Search bar */}
+                <section className="bg-surface-container-low rounded-3xl p-6 md:p-8 border border-outline-variant/10 shadow-sm text-center">
+                  <h2 className="text-3xl font-bold text-primary md:text-4xl tracking-tight">Help &amp; Support</h2>
+                  <p className="text-on-surface-variant mt-2 text-base max-w-lg mx-auto font-medium">
+                    Find answers to common questions about booking sessions, assessment clinical standards, and security setups.
+                  </p>
+                  
+                  <div className="relative max-w-md mx-auto mt-6">
+                    <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline">search</span>
+                    <input 
+                      type="text" 
+                      placeholder="Search FAQs (e.g. 'privacy', 'cancel')..."
+                      value={faqSearch}
+                      onChange={(e) => setFaqSearch(e.target.value)}
+                      className="w-full pl-11 pr-4 py-3 rounded-full border border-outline-variant/60 focus:ring-1 focus:ring-primary focus:border-primary bg-surface/50 outline-none text-sm font-semibold transition-all shadow-inner"
+                    />
+                  </div>
+                </section>
+
+                {/* FAQs Accordions list */}
+                <section className="max-w-2xl mx-auto space-y-8">
+                  {faqs.map((group, groupIdx) => {
+                    // Filter items based on search query
+                    const filteredItems = group.items.filter(
+                      item => item.q.toLowerCase().includes(faqSearch.toLowerCase()) || 
+                              item.a.toLowerCase().includes(faqSearch.toLowerCase())
+                    );
+                    
+                    if (filteredItems.length === 0) return null;
+
+                    return (
+                      <div key={groupIdx} className="space-y-3">
+                        <div className="flex items-center gap-2 px-2 text-primary font-bold text-sm uppercase tracking-wider">
+                          <span className="material-symbols-outlined text-lg">{group.icon}</span>
+                          <span>{group.category}</span>
+                        </div>
+
+                        <div className="space-y-3">
+                          {filteredItems.map((item, itemIdx) => {
+                            const globalIdx = `${groupIdx}-${itemIdx}`;
+                            const isOpen = openFaqs[globalIdx];
+                            return (
+                              <div key={itemIdx} className="bg-white rounded-xl shadow-sm border border-outline-variant/20 overflow-hidden transition-all duration-300">
+                                <button 
+                                  onClick={() => toggleFaq(globalIdx)}
+                                  className="w-full flex items-center justify-between p-5 hover:bg-surface-container-low transition-colors text-left">
+                                  <h4 className="text-sm font-bold text-on-surface pr-4">{item.q}</h4>
+                                  <span className={`material-symbols-outlined text-outline transition-transform duration-300 ${isOpen ? 'rotate-180 text-primary' : ''}`}>
+                                    expand_more
+                                  </span>
+                                </button>
+                                {isOpen && (
+                                  <div className="bg-surface/30 px-5 pb-5 pt-1 text-xs text-on-surface-variant leading-relaxed border-t border-surface-container/30 font-medium">
+                                    {item.a}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </section>
+
+                {/* Support footer Contact card */}
+                <section className="bg-white rounded-2xl p-6 border border-surface-container-highest max-w-xl mx-auto text-center shadow-sm">
+                  <h3 className="text-xl font-bold text-on-surface mb-2">Still have questions?</h3>
+                  <p className="text-xs text-on-surface-variant leading-relaxed font-semibold max-w-sm mx-auto mb-6">
+                    Our operations team is available Monday to Friday to assist with consultation scheduling or booking questions.
+                  </p>
+                  <button 
+                    onClick={() => alert('Support message sent successfully! We will get back to you shortly.')}
+                    className="px-6 py-2.5 bg-primary text-on-primary rounded-full text-xs font-bold hover:bg-primary/95 transition-all duration-300 shadow-sm">
+                    Contact Support Desk
+                  </button>
+                </section>
+              </div>
+            )}
+
+            {/* VIEW 6: Privacy & Security */}
+            {activeTab === 'privacy_security' && (
+              <div className="max-w-[760px] mx-auto space-y-10 animate-slide-up">
+                
+                {/* Main Header */}
+                <section className="text-center pt-6">
+                  <div className="w-16 h-16 rounded-full bg-primary-container/20 flex items-center justify-center mx-auto mb-4 text-primary animate-pulse">
+                    <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>shield_lock</span>
+                  </div>
+                  <h2 className="text-3xl font-extrabold text-on-surface md:text-4xl tracking-tight">Your Sanctuary is Secure</h2>
+                  <p className="text-on-surface-variant mt-3 text-base leading-relaxed max-w-[600px] mx-auto font-medium">
+                    At Mind Care, we believe your mental wellness journey is deeply personal. Our commitment to your privacy is woven into every layer of our platform.
+                  </p>
+                </section>
+
+                {/* Highlights notice bar */}
+                <section className="bg-primary-container/10 border border-primary-container/30 rounded-2xl p-6 flex items-start gap-4 shadow-sm">
+                  <span className="material-symbols-outlined text-primary mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+                  <div>
+                    <h3 className="text-sm font-bold text-primary mb-1">Our Core Privacy Promise</h3>
+                    <p className="text-xs text-on-surface-variant leading-relaxed font-medium">
+                      We will never sell or rent your personal, health, or assessment data to third-party advertisers. All assessments and journals are stored securely and remain accessible only to you.
+                    </p>
+                  </div>
+                </section>
+
+                {/* Security points accordion lists */}
+                <section className="space-y-4">
+                  {[
+                    { title: 'Data Encryption Standards', icon: 'lock', body: 'All sensitive information exchanged between your device and our cloud servers is protected using military-grade 256-bit AES encryption. This is the same strict security standard utilized by leading global financial organizations and healthcare systems, preventing unauthorized decryption of your health details.' },
+                    { title: ' HIPAA Compliance Protocols', icon: 'cloud_done', body: 'Our database and cloud container services operate under audited configurations that align with HIPAA requirements. Booking records, consulting reports, and assessment details remain safe under strict system partition access controllers.' },
+                    { title: 'Access Audit Control', icon: 'gavel', body: 'Mind Care maintains rigid internal audits. Employees do not have direct authorization to browse details of clinical check-ins, assessment questions, or consult entries, securing your mental health record.' }
+                  ].map((item, idx) => {
+                    const globalIdx = `privacy-${idx}`;
+                    const isOpen = openFaqs[globalIdx];
+                    return (
+                      <div key={idx} className="bg-white rounded-xl border border-outline-variant/20 overflow-hidden shadow-sm">
+                        <button 
+                          onClick={() => toggleFaq(globalIdx)}
+                          className="w-full flex items-center justify-between p-5 hover:bg-surface-container-low transition-colors text-left">
+                          <div className="flex items-center gap-4">
+                            <span className="material-symbols-outlined text-primary text-xl">{item.icon}</span>
+                            <h3 className="text-sm font-bold text-on-surface">{item.title}</h3>
+                          </div>
+                          <span className={`material-symbols-outlined text-outline transition-transform duration-300 ${isOpen ? 'rotate-180 text-primary' : ''}`}>
+                            expand_more
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <div className="bg-surface/30 px-5 pb-5 pt-1 text-xs text-on-surface-variant leading-relaxed border-t border-surface-container/30 font-medium">
+                            {item.body}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </section>
+              </div>
+            )}
+
+          </main>
+
+          {/* Mobile Bottom Navigation Bar */}
+          <nav className="md:hidden fixed bottom-0 left-0 w-full z-40 bg-surface border-t border-surface-variant/30 flex justify-around items-center h-16 pb-safe px-2 shadow-[0_-4px_16px_rgba(0,0,0,0.03)] rounded-t-2xl">
+            <button 
+              onClick={() => handleNavigate('dashboard')}
+              className={`flex flex-col items-center justify-center w-16 h-full transition-transform active:scale-95 duration-200 ${activeTab === 'dashboard' ? 'text-primary' : 'text-on-surface-variant'}`}>
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: activeTab === 'dashboard' ? "'FILL' 1" : "'FILL' 0" }}>dashboard</span>
+              <span className="text-[10px] font-bold mt-0.5">Dashboard</span>
+            </button>
+            <button 
+              onClick={() => handleNavigate('assessments')}
+              className={`flex flex-col items-center justify-center w-16 h-full transition-transform active:scale-95 duration-200 ${activeTab === 'assessments' ? 'text-primary' : 'text-on-surface-variant'}`}>
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: activeTab === 'assessments' ? "'FILL' 1" : "'FILL' 0" }}>quiz</span>
+              <span className="text-[10px] font-bold mt-0.5">Assess</span>
+            </button>
+            <button 
+              onClick={() => handleNavigate('track_record')}
+              className={`flex flex-col items-center justify-center w-16 h-full transition-transform active:scale-95 duration-200 ${activeTab === 'track_record' ? 'text-primary' : 'text-on-surface-variant'}`}>
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: activeTab === 'track_record' ? "'FILL' 1" : "'FILL' 0" }}>insights</span>
+              <span className="text-[10px] font-bold mt-0.5">Track</span>
+            </button>
+            <button 
+              onClick={() => handleNavigate('consultations')}
+              className={`flex flex-col items-center justify-center w-16 h-full transition-transform active:scale-95 duration-200 ${activeTab === 'consultations' ? 'text-primary' : 'text-on-surface-variant'}`}>
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: activeTab === 'consultations' ? "'FILL' 1" : "'FILL' 0" }}>groups</span>
+              <span className="text-[10px] font-bold mt-0.5">Consult</span>
+            </button>
+          </nav>
+
+          {/* MODAL VIEW: Interactive Therapeutic Video Call */}
+          {showVideoCall && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/85 backdrop-blur-md animate-fade-in p-4">
+              <div className="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-2xl w-full max-w-4xl h-[90vh] md:h-[600px] flex flex-col md:flex-row relative">
+                
+                {/* Left side: Simulated Video canvas (Col Span) */}
+                <div className="flex-grow bg-neutral-900 flex flex-col justify-between p-4 relative group min-h-[300px]">
+                  
+                  {/* Doctor remote stream container */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      alt="Doctor Stream" 
+                      className="w-full h-full object-cover opacity-80" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqY4POmUciCm4frH6QmphpnEJ9GA0qRk_syh8yis_b7nApJZPonVeM0D2XDR4GKiafKJGdGRLmYGuyAfreSxSWZ7CqSzb55yc7_gtT-xD_qzNyc1ZSiHXg0lS5Xf7w-OnaJMcrpwKE1aOP1IwZ2OETp7XpM9IpMoUJikyHSd8juYzSEs4dKSDq5Mh9M3dwBHrqKrS-EIBJbnQdC_JrFMudmDfdQGXbb_uKQoTCjZ25axB74z_uC5N6IA"
+                    />
+                    {/* Visual blur glow */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  </div>
+
+                  {/* Top controls info bar */}
+                  <div className="relative z-10 flex justify-between items-center text-white w-full">
+                    <div className="bg-black/40 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-2 backdrop-blur-sm">
+                      <span className="w-2 h-2 bg-red-500 rounded-full animate-ping"></span>
+                      <span>Dr. Ananya Sharma (Live)</span>
+                    </div>
+                    <div className="bg-black/40 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm">
+                      {videoCallDuration}
+                    </div>
+                  </div>
+
+                  {/* Local patient camera preview (PIP) */}
+                  <div className="absolute bottom-4 right-4 w-28 h-36 rounded-xl overflow-hidden bg-neutral-800 border-2 border-white/20 shadow-md z-10">
+                    <img 
+                      alt="Patient Stream" 
+                      className="w-full h-full object-cover" 
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT4_acYkpaqwuyRb0zbDwjmnnic1Zy-rL6Ktz7kbVXyjk7Sfv9u8H0OGcG9O3W3ip0wdVz9wuCn7p9HPoUi-O2IJ_D6gBtBH-hsyq-tAhAE_GvNgTIAUeW3f4k0N2CxuVPL9obWitxKzUvApZ1uNNUwcmzxkLX4dsDH1L21gpQdO6Q1F5w0g6YFm6Z0biO6cMbM34Oo4P3m6PMvfFViPqBnbojDeBMNA8TsnErpaaYH8i1eFbNre8UEA"
+                    />
+                  </div>
+
+                  {/* Audio controller icons bar */}
+                  <div className="relative z-10 flex justify-center items-center gap-4 mt-auto w-full">
+                    <button className="w-10 h-10 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center backdrop-blur-sm transition-colors active:scale-90">
+                      <span className="material-symbols-outlined">mic</span>
+                    </button>
+                    <button className="w-10 h-10 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center backdrop-blur-sm transition-colors active:scale-90">
+                      <span className="material-symbols-outlined">videocam</span>
+                    </button>
+                    <button 
+                      onClick={() => setShowVideoCall(false)}
+                      className="w-12 h-12 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center shadow-lg transition-transform active:scale-90 duration-200">
+                      <span className="material-symbols-outlined">call_end</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right side: Session chat notes (Desktop only) */}
+                <div className="hidden md:flex flex-col w-80 bg-surface border-l border-outline-variant/10 h-full p-4 justify-between animate-fade-in">
+                  <div>
+                    <h3 className="font-bold text-on-surface mb-3 flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-primary">chat_bubble</span>
+                      Consultation Chat
+                    </h3>
+                    <div className="h-[430px] overflow-y-auto space-y-3 pr-1 hide-scrollbar">
+                      <div className="bg-secondary-container/20 text-on-secondary-container p-3 rounded-2xl text-xs leading-relaxed font-semibold max-w-[85%]">
+                        Hello Sarah, welcome to your sanctuary. How have you been feeling since our last session?
+                      </div>
+                      <div className="bg-primary/10 text-on-primary-container p-3 rounded-2xl text-xs leading-relaxed font-semibold max-w-[85%] ml-auto text-right">
+                        Honestly, a bit overwhelmed with work.
+                      </div>
+                      <div className="bg-secondary-container/20 text-on-secondary-container p-3 rounded-2xl text-xs leading-relaxed font-semibold max-w-[85%]">
+                        I understand. Let's practice a grounding technique to start.
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 border-t border-surface-container pt-3">
+                    <input 
+                      type="text" 
+                      placeholder="Type message..." 
+                      className="flex-1 p-2 rounded-xl border border-outline-variant text-xs outline-none focus:ring-1 focus:ring-primary"
+                    />
+                    <button className="w-8 h-8 bg-primary text-on-primary rounded-xl flex items-center justify-center hover:opacity-90 active:scale-90">
+                      <span className="material-symbols-outlined text-sm">send</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  </script>
+</body>
+</html>
