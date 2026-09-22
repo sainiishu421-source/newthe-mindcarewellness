@@ -242,10 +242,13 @@ def run_standalone_server(port=8000):
         print("\nShutting down server.")
 
 if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    host = os.environ.get("HOST", "0.0.0.0")
     if HAS_FASTAPI:
         import uvicorn
-        print("Starting FastAPI server on http://localhost:8000...")
-        uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+        print(f"Starting FastAPI server on http://{host}:{port}...")
+        uvicorn.run("main:app", host=host, port=port)
     else:
-        print("FastAPI not detected, running with standard Python HTTP server on port 8000...")
-        run_standalone_server(8000)
+        print(f"FastAPI not detected, running standard Python HTTP server on http://{host}:{port}...")
+        run_standalone_server(port)
