@@ -150,11 +150,30 @@ export default function App() {
   const [paymentErrors, setPaymentErrors] = useState({});
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
-  // Active Assessment State
+  // Active Assessment State & Quizzes
   const [activeAssessment, setActiveAssessment] = useState(null);
   const [quizStep, setQuizStep] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [quizResult, setQuizResult] = useState(null);
+
+  // Search & Global Overlay States
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [notificationsList, setNotificationsList] = useState([
+    { id: 1, title: 'Weekly Assessment Reminder', time: '10m ago', unread: true, icon: 'quiz' },
+    { id: 2, title: 'Appointment Confirmed with Dr. Ananya Sharma', time: '2h ago', unread: true, icon: 'check_circle' },
+    { id: 3, title: '14-Day Streak Badge Unlocked!', time: '1d ago', unread: false, icon: 'local_fire_department' }
+  ]);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [userProfile, setUserProfile] = useState({
+    name: 'Sarah Jenkins',
+    email: 'sarah.jenkins@mindcare.io',
+    membership: 'Premium Member',
+    avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCT4_acYkpaqwuyRb0zbDwjmnnic1Zy-rL6Ktz7kbVXyjk7Sfv9u8H0OGcG9O3W3ip0wdVz9wuCn7p9HPoUi-O2IJ_D6gBtBH-hsyq-tAhAE_GvNgTIAUeW3f4k0N2CxuVPL9obWitxKzUvApZ1uNNUwcmzxkLX4dsDH1L21gpQdO6Q1F5w0g6YFm6Z0biO6cMbM34Oo4P3m6PMvfFViPqBnbojDeBMNA8TsnErpaaYH8i1eFbNre8UEA'
+  });
+
+  // Contact Care Team Modal State
+  const [showContactModal, setShowContactModal] = useState(false);
 
   // Mock Video Call State
   const [showVideoCall, setShowVideoCall] = useState(false);
@@ -186,6 +205,7 @@ export default function App() {
     setPaymentSuccess(false);
     setActiveAssessment(null);
     setQuizResult(null);
+    setSearchQuery('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -200,69 +220,118 @@ export default function App() {
     postMoodApi(mood, msg);
   };
 
-  // Assessment Quiz definition
-  const anxietyQuiz = {
-    title: 'Anxiety Check (GAD-7)',
-    subtitle: 'Over the last 2 weeks, how often have you been bothered by the following problems?',
-    questions: [
-      'Feeling nervous, anxious or on edge',
-      'Not being able to stop or control worrying',
-      'Worrying too much about different things',
-      'Trouble relaxing',
-      'Being so restless that it is hard to sit still',
-      'Becoming easily annoyed or irritable',
-      'Feeling afraid as if something awful might happen'
-    ],
-    options: [
-      { text: 'Not at all', score: 0 },
-      { text: 'Several days', score: 1 },
-      { text: 'More than half the days', score: 2 },
-      { text: 'Nearly every day', score: 3 }
-    ]
+  // Assessment Quizzes dictionary
+  const quizzes = {
+    anxiety: {
+      id: 'anxiety',
+      title: 'Anxiety Check (GAD-7)',
+      subtitle: 'Over the last 2 weeks, how often have you been bothered by the following problems?',
+      questions: [
+        'Feeling nervous, anxious or on edge',
+        'Not being able to stop or control worrying',
+        'Worrying too much about different things',
+        'Trouble relaxing',
+        'Being so restless that it is hard to sit still',
+        'Becoming easily annoyed or irritable',
+        'Feeling afraid as if something awful might happen'
+      ],
+      options: [
+        { text: 'Not at all', score: 0 },
+        { text: 'Several days', score: 1 },
+        { text: 'More than half the days', score: 2 },
+        { text: 'Nearly every day', score: 3 }
+      ],
+      maxScore: 21,
+      calculateSeverity: (score) => {
+        if (score <= 4) return { severity: 'Minimal', rec: 'Your anxiety levels are currently minimal. Keep practicing daily mindfulness to maintain your wellbeing.' };
+        if (score <= 9) return { severity: 'Mild', rec: 'You have mild anxiety symptoms. We recommend reviewing stress management articles and engaging in deep breathing.' };
+        if (score <= 14) return { severity: 'Moderate', rec: 'You are experiencing moderate anxiety symptoms. Regularly scheduling therapy check-ins can provide effective coping tools.' };
+        return { severity: 'Severe', rec: 'Your anxiety level indicates severe symptoms. We strongly suggest booking a video session with a clinical psychologist for targeted support.' };
+      }
+    },
+    stress: {
+      id: 'stress',
+      title: 'Perceived Stress Scale (PSS)',
+      subtitle: 'In the last month, how often have you experienced the following feelings of stress?',
+      questions: [
+        'Felt unable to control the important things in your life',
+        'Felt confident about your ability to handle personal problems',
+        'Felt that things were going your way',
+        'Felt difficulties were piling up so high that you could not overcome them',
+        'Felt nervous or stressed by workload and daily responsibilities'
+      ],
+      options: [
+        { text: 'Never', score: 0 },
+        { text: 'Almost Never', score: 1 },
+        { text: 'Sometimes', score: 2 },
+        { text: 'Fairly Often', score: 3 }
+      ],
+      maxScore: 15,
+      calculateSeverity: (score) => {
+        if (score <= 5) return { severity: 'Low Stress', rec: 'Your perceived stress level is low. Continue maintaining work-life balance and resting regularly.' };
+        if (score <= 10) return { severity: 'Moderate Stress', rec: 'You are experiencing moderate stress. Consider trying deep breathing exercises and scheduling a consultation.' };
+        return { severity: 'High Stress', rec: 'Your stress level is elevated. We recommend taking time off to recharge and consulting with a specialist.' };
+      }
+    },
+    sleep: {
+      id: 'sleep',
+      title: 'Sleep Quality Check',
+      subtitle: 'During the past month, evaluate your typical night-time rest pattern and sleep hygiene:',
+      questions: [
+        'How long does it typically take you to fall asleep each night?',
+        'How often do you wake up during the middle of the night?',
+        'How would you rate your overall sleep quality when waking up?',
+        'How often do you feel fatigued or sluggish during daytime activities?'
+      ],
+      options: [
+        { text: 'Very Good / Under 15 mins', score: 0 },
+        { text: 'Fair / 15-30 mins', score: 1 },
+        { text: 'Poor / 30-60 mins', score: 2 },
+        { text: 'Very Poor / Over 60 mins', score: 3 }
+      ],
+      maxScore: 12,
+      calculateSeverity: (score) => {
+        if (score <= 3) return { severity: 'Optimal Rest', rec: 'Your sleep quality is excellent. Keep your sleep schedule consistent!' };
+        if (score <= 7) return { severity: 'Mild Disruption', rec: 'You have mild sleep disruption. Try avoiding screen light 1 hour before bedtime.' };
+        return { severity: 'Significant Sleep Debt', rec: 'Your sleep hygiene needs attention. We recommend setting a fixed sleep routine and relaxing exercises.' };
+      }
+    }
   };
 
   const startQuiz = (type) => {
-    setActiveAssessment(type);
+    const quizKey = quizzes[type] ? type : 'anxiety';
+    setActiveAssessment(quizKey);
     setQuizStep(0);
     setQuizAnswers({});
     setQuizResult(null);
   };
 
   const handleSelectQuizOption = (optionScore) => {
+    const currentQuiz = quizzes[activeAssessment] || quizzes.anxiety;
     const nextAnswers = { ...quizAnswers, [quizStep]: optionScore };
     setQuizAnswers(nextAnswers);
 
-    if (quizStep < anxietyQuiz.questions.length - 1) {
+    if (quizStep < currentQuiz.questions.length - 1) {
       setQuizStep(quizStep + 1);
     } else {
       const totalScore = Object.values(nextAnswers).reduce((sum, s) => sum + s, 0);
-      let severity = 'Minimal';
-      let recommendation = 'Your anxiety levels are currently minimal. Keep practicing daily mindfulness to maintain your wellbeing.';
-
-      if (totalScore >= 5 && totalScore <= 9) {
-        severity = 'Mild';
-        recommendation = 'You have mild anxiety symptoms. We recommend reviewing stress management articles, tracking your daily moods, and engaging in deep breathing exercises.';
-      } else if (totalScore >= 10 && totalScore <= 14) {
-        severity = 'Moderate';
-        recommendation = 'You are experiencing moderate anxiety symptoms. Regularly scheduling 30-min therapy check-ins can provide effective coping tools.';
-      } else if (totalScore >= 15) {
-        severity = 'Severe';
-        recommendation = 'Your anxiety level indicates severe symptoms. We strongly suggest booking a comprehensive video session with a clinical psychologist for targeted support.';
-      }
+      const { severity, rec } = currentQuiz.calculateSeverity(totalScore);
 
       setQuizResult({
         score: totalScore,
+        maxScore: currentQuiz.maxScore,
         severity,
-        recommendation
+        recommendation: rec
       });
     }
   };
 
   const handleSaveQuizResults = async () => {
+    const currentQuiz = quizzes[activeAssessment] || quizzes.anxiety;
     const newMilestone = {
       id: Date.now(),
-      title: `Anxiety Check Result: ${quizResult.severity}`,
-      detail: `Scored ${quizResult.score}/21. ${quizResult.recommendation.split('.')[0]}.`,
+      title: `${currentQuiz.title} Result: ${quizResult.severity}`,
+      detail: `Scored ${quizResult.score}/${quizResult.maxScore}. ${quizResult.recommendation.split('.')[0]}.`,
       date: 'Today',
       icon: 'verified',
       isPrimary: true
@@ -272,7 +341,7 @@ export default function App() {
     
     // Save to Python Backend
     await submitAssessmentApi({
-      test_type: 'Anxiety Check (GAD-7)',
+      test_type: currentQuiz.title,
       score: quizResult.score,
       severity: quizResult.severity,
       recommendation: quizResult.recommendation
@@ -310,7 +379,7 @@ export default function App() {
       
       const newMilestone = {
         id: Date.now(),
-        title: `Booked Consultation with ${selectedConsultant.name}`,
+        title: `Booked Session with ${selectedConsultant.name}`,
         detail: `Scheduled for ${bookingDate} at ${bookingTime} via ${sessionFormat}.`,
         date: 'Today',
         icon: 'check_circle',
@@ -336,6 +405,14 @@ export default function App() {
     setOpenFaqs(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const markAllNotificationsRead = () => {
+    setNotificationsList(notificationsList.map(n => ({ ...n, unread: false })));
+  };
+
+  const clearNotification = (id) => {
+    setNotificationsList(notificationsList.filter(n => n.id !== id));
+  };
+
   return (
     <div className="bg-slate-50 text-slate-900 antialiased flex flex-col md:flex-row min-h-screen relative font-sans">
       <Sidebar 
@@ -349,6 +426,20 @@ export default function App() {
         activeTab={activeTab} 
         handleNavigate={handleNavigate} 
         apiStatus={apiStatus}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        showNotifications={showNotifications}
+        setShowNotifications={setShowNotifications}
+        notificationsList={notificationsList}
+        markAllNotificationsRead={markAllNotificationsRead}
+        clearNotification={clearNotification}
+        showProfileModal={showProfileModal}
+        setShowProfileModal={setShowProfileModal}
+        userProfile={userProfile}
+        setUserProfile={setUserProfile}
+        consultants={consultants}
+        setSelectedConsultant={setSelectedConsultant}
+        startQuiz={startQuiz}
       />
 
       <main className="flex-1 w-full md:ml-64 pt-6 md:pt-28 px-4 md:px-8 pb-24 md:pb-16 max-w-7xl mx-auto">
@@ -371,7 +462,7 @@ export default function App() {
           <AssessmentsView
             activeAssessment={activeAssessment}
             startQuiz={startQuiz}
-            anxietyQuiz={anxietyQuiz}
+            quizzes={quizzes}
             quizStep={quizStep}
             quizAnswers={quizAnswers}
             handleSelectQuizOption={handleSelectQuizOption}
@@ -412,6 +503,7 @@ export default function App() {
             setPaymentCard={setPaymentCard}
             paymentErrors={paymentErrors}
             paymentSuccess={paymentSuccess}
+            setPaymentSuccess={setPaymentSuccess}
             handlePayConfirm={handlePayConfirm}
             showVideoCall={showVideoCall}
             setShowVideoCall={setShowVideoCall}
@@ -426,13 +518,55 @@ export default function App() {
             setFaqSearch={setFaqSearch}
             openFaqs={openFaqs}
             toggleFaq={toggleFaq}
+            setShowContactModal={setShowContactModal}
           />
         )}
 
         {activeTab === 'privacy_security' && (
-          <PrivacySecurityView />
+          <PrivacySecurityView milestones={milestones} userProfile={userProfile} />
         )}
       </main>
+
+      {/* Contact Support Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 animate-slide-up-fade">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative">
+            <button 
+              onClick={() => setShowContactModal(false)}
+              className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 rounded-full"
+            >
+              <span className="material-symbols-outlined text-xl">close</span>
+            </button>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-teal-50 text-teal-700 rounded-2xl flex items-center justify-center border border-teal-100 font-extrabold">
+                <span className="material-symbols-outlined text-2xl">support_agent</span>
+              </div>
+              <div>
+                <h3 className="text-xl font-extrabold text-slate-800">Contact Care Team</h3>
+                <p className="text-xs text-teal-600 font-bold">24/7 Priority Support</p>
+              </div>
+            </div>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              alert("Your message has been sent to our Care Team! We will reply via email shortly.");
+              setShowContactModal(false);
+            }} className="space-y-4">
+              <div>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Subject</label>
+                <input required type="text" placeholder="e.g. Question about appointment" className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:border-teal-600 outline-none" />
+              </div>
+              <div>
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Message</label>
+                <textarea required rows={4} placeholder="Describe your request..." className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs font-semibold focus:border-teal-600 outline-none resize-none"></textarea>
+              </div>
+              <button type="submit" className="w-full gradient-btn text-white py-3 rounded-xl font-bold text-sm shadow-md shadow-teal-500/20">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+

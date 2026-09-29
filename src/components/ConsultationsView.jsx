@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function ConsultationsView({
   consultants,
@@ -23,156 +23,138 @@ export default function ConsultationsView({
   setPaymentCard,
   paymentErrors,
   paymentSuccess,
+  setPaymentSuccess,
   handlePayConfirm,
   showVideoCall,
   setShowVideoCall,
   videoCallDuration
 }) {
   const dates = ['Oct 12', 'Oct 13', 'Oct 14', 'Oct 15', 'Oct 16'];
-  const times = ['10:00 AM', '1:00 PM', '3:00 PM', '5:00 PM'];
-  const formats = ['Video call', 'Audio call', 'In-person clinic'];
+  const times = ['10:00 AM', '1:00 PM', '3:00 PM', '5:30 PM'];
 
-  const basePrice = selectedConsultant ? selectedConsultant.cost : 150;
-  const durationMultiplier = sessionDuration === 30 ? 0.6 : 1.0;
-  const rawCost = basePrice * durationMultiplier;
-  const finalCost = Math.round(rawCost * (1 - discountPercent / 100));
+  // Video call controls state
+  const [isMicMuted, setIsMicMuted] = useState(false);
+  const [isCamOff, setIsCamOff] = useState(false);
 
-  if (showVideoCall) {
-    return (
-      <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
-        <div className="bg-slate-900 text-white rounded-3xl p-6 shadow-2xl relative overflow-hidden space-y-6">
-          <div className="flex justify-between items-center border-b border-slate-800 pb-4">
-            <div className="flex items-center gap-3">
-              <span className="w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
-              <div>
-                <h3 className="font-bold text-lg">Live Session: {selectedConsultant.name}</h3>
-                <p className="text-xs text-slate-400">Encrypted 256-Bit HIPAA Compliant Call</p>
-              </div>
-            </div>
-            <div className="bg-slate-800 px-3 py-1.5 rounded-full text-xs font-mono text-emerald-400">
-              {videoCallDuration}
-            </div>
-          </div>
-
-          <div className="relative aspect-video bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 flex items-center justify-center">
-            <img 
-              src={selectedConsultant.imageUrl} 
-              alt={selectedConsultant.name}
-              className="w-full h-full object-cover opacity-80"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-            
-            {/* Self Video overlay */}
-            <div className="absolute bottom-4 right-4 w-36 h-24 bg-slate-700 rounded-xl overflow-hidden border-2 border-white/20 shadow-lg">
-              <img 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT4_acYkpaqwuyRb0zbDwjmnnic1Zy-rL6Ktz7kbVXyjk7Sfv9u8H0OGcG9O3W3ip0wdVz9wuCn7p9HPoUi-O2IJ_D6gBtBH-hsyq-tAhAE_GvNgTIAUeW3f4k0N2CxuVPL9obWitxKzUvApZ1uNNUwcmzxkLX4dsDH1L21gpQdO6Q1F5w0g6YFm6Z0biO6cMbM34Oo4P3m6PMvfFViPqBnbojDeBMNA8TsnErpaaYH8i1eFbNre8UEA" 
-                alt="Sarah"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="absolute bottom-4 left-4">
-              <p className="text-sm font-bold">{selectedConsultant.name}</p>
-              <p className="text-xs text-slate-300">{selectedConsultant.title}</p>
-            </div>
-          </div>
-
-          {/* Call Controls */}
-          <div className="flex justify-center items-center gap-4 py-2">
-            <button className="w-12 h-12 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center">
-              <span className="material-symbols-outlined">mic</span>
-            </button>
-            <button className="w-12 h-12 rounded-full bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center">
-              <span className="material-symbols-outlined">videocam</span>
-            </button>
-            <button 
-              onClick={() => setShowVideoCall(false)}
-              className="w-14 h-14 rounded-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center shadow-lg"
-            >
-              <span className="material-symbols-outlined text-2xl">call_end</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const originalPrice = selectedConsultant ? selectedConsultant.cost : 150;
+  const finalPrice = discountPercent > 0 ? (originalPrice * (1 - discountPercent / 100)).toFixed(2) : originalPrice.toFixed(2);
 
   return (
-    <div className="space-y-8 animate-fade-in">
-      <div>
-        <h2 className="text-2xl font-bold text-slate-800">Therapists & Consultation Booking</h2>
-        <p className="text-slate-500 text-sm mt-1">
-          Schedule confidential 1-on-1 video sessions with board-certified clinical psychologists.
-        </p>
+    <div className="space-y-8 animate-slide-up-fade">
+      {/* Header Banner */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-teal-900 via-teal-800 to-slate-900 p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="relative z-10">
+          <span className="px-3 py-1 bg-teal-700/60 rounded-full text-xs font-bold uppercase tracking-wider text-teal-200 border border-teal-500/30">
+            Licensed Professionals
+          </span>
+          <h2 className="text-3xl font-extrabold tracking-tight mt-2">Book Clinical Consultations</h2>
+          <p className="text-teal-100 text-sm mt-1 max-w-xl leading-relaxed">
+            Schedule 1-on-1 confidential therapy sessions with experienced clinical psychologists and specialists.
+          </p>
+        </div>
+
+        <button 
+          onClick={() => setShowVideoCall(true)}
+          className="relative z-10 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 border border-emerald-400/30 px-5 py-3 rounded-2xl font-bold text-sm backdrop-blur-md flex items-center gap-2.5 transition-all shadow-md"
+        >
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Demo Video Session
+        </button>
       </div>
 
+      {/* Main Grid: Therapist Selection & Booking Details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left 2 Cols: Consultant Selector & Details */}
+        
+        {/* Left 2 Cols: Therapist Selector Grid */}
         <div className="lg:col-span-2 space-y-6">
-          <h3 className="text-lg font-bold text-slate-800">1. Select Licensed Therapist</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {consultants.map((c) => (
-              <div
-                key={c.id}
-                onClick={() => setSelectedConsultant(c)}
-                className={`p-4 rounded-2xl border cursor-pointer transition-all ${
-                  selectedConsultant.id === c.id 
-                    ? 'border-teal-600 bg-teal-50/40 ring-2 ring-teal-600/20 shadow-md' 
-                    : 'border-slate-200 hover:border-slate-300 bg-white'
-                }`}
-              >
-                <img 
-                  src={c.imageUrl} 
-                  alt={c.name} 
-                  className="w-full h-36 object-cover rounded-xl mb-3 shadow-sm"
-                />
-                <h4 className="font-bold text-slate-800 text-sm leading-tight">{c.name}</h4>
-                <p className="text-xs text-slate-500 mt-0.5">{c.title}</p>
-                <div className="flex items-center gap-1 mt-2 text-xs font-bold text-amber-500">
-                  <span className="material-symbols-outlined text-sm text-amber-500">star</span>
-                  {c.rating} ({c.reviews})
+          <h3 className="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+            <span className="material-symbols-outlined text-teal-600">psychology</span>
+            Select a Specialist
+          </h3>
+
+          <div className="grid grid-cols-1 gap-5">
+            {consultants.map((c) => {
+              const isSelected = selectedConsultant?.id === c.id;
+              return (
+                <div 
+                  key={c.id}
+                  onClick={() => setSelectedConsultant(c)}
+                  className={`glass-card p-6 rounded-3xl border transition-all duration-300 cursor-pointer flex flex-col sm:flex-row gap-5 items-start sm:items-center relative ${
+                    isSelected 
+                      ? 'border-teal-600 ring-2 ring-teal-500/20 shadow-lg bg-teal-50/30' 
+                      : 'border-slate-200/80 hover:border-teal-500/40'
+                  }`}
+                >
+                  <img 
+                    src={c.imageUrl} 
+                    alt={c.name}
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shadow-sm border-2 border-white flex-shrink-0"
+                  />
+                  <div className="flex-1 space-y-2">
+                    <div className="flex flex-wrap justify-between items-start gap-2">
+                      <div>
+                        <h4 className="text-lg font-extrabold text-slate-800">{c.name}</h4>
+                        <p className="text-xs text-teal-700 font-bold">{c.title}</p>
+                      </div>
+                      <span className="text-lg font-black text-slate-900 bg-slate-100 px-3 py-1 rounded-xl">
+                        ${c.cost} <span className="text-xs text-slate-500 font-medium">/ hr</span>
+                      </span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {c.specialties.map(s => (
+                        <span key={s} className="px-2.5 py-0.5 bg-teal-50 text-teal-800 text-[11px] font-bold rounded-full border border-teal-100">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-4 text-xs font-bold text-slate-500 pt-1">
+                      <span className="flex items-center gap-1 text-amber-600">
+                        <span className="material-symbols-outlined text-sm text-amber-500">star</span>
+                        {c.rating} ({c.reviews})
+                      </span>
+                      <span>•</span>
+                      <span>{c.experience} Exp</span>
+                      <span>•</span>
+                      <span>{c.languages}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right 1 Col: Interactive Booking Panel */}
+        <div className="space-y-6">
+          <div className="glass-card p-6 sm:p-7 rounded-3xl border border-slate-200/80 shadow-xl space-y-6 sticky top-28">
+            <h3 className="text-xl font-extrabold text-slate-800 border-b border-slate-100 pb-4 flex items-center justify-between">
+              <span>Appointment Details</span>
+              <span className="text-xs font-bold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-full border border-teal-100">Step 2 of 2</span>
+            </h3>
+
+            {/* Selected Therapist Summary */}
+            {selectedConsultant && (
+              <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-200/80">
+                <img src={selectedConsultant.imageUrl} alt="" className="w-10 h-10 rounded-xl object-cover" />
+                <div>
+                  <p className="text-xs font-extrabold text-slate-800">{selectedConsultant.name}</p>
+                  <p className="text-[11px] text-teal-700 font-bold">{selectedConsultant.title}</p>
                 </div>
               </div>
-            ))}
-          </div>
+            )}
 
-          {/* Selected Therapist Bio */}
-          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-4">
-            <div className="flex items-start gap-4">
-              <img 
-                src={selectedConsultant.imageUrl} 
-                alt={selectedConsultant.name}
-                className="w-16 h-16 rounded-2xl object-cover shadow-md" 
-              />
-              <div>
-                <h3 className="text-lg font-bold text-slate-800">{selectedConsultant.name}</h3>
-                <p className="text-xs text-teal-700 font-semibold">{selectedConsultant.title}</p>
-                <p className="text-xs text-slate-400 mt-1">Languages: {selectedConsultant.languages} • Exp: {selectedConsultant.experience}</p>
-              </div>
-            </div>
-            <p className="text-slate-600 text-sm leading-relaxed">{selectedConsultant.bio}</p>
-
-            <div className="flex flex-wrap gap-2 pt-2">
-              {selectedConsultant.specialties.map((s) => (
-                <span key={s} className="px-3 py-1 bg-slate-100 text-slate-700 text-xs font-medium rounded-full">
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Booking Options */}
-          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
-            <h3 className="text-lg font-bold text-slate-800">2. Customize Session Details</h3>
-
-            <div>
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Select Date</label>
-              <div className="flex flex-wrap gap-2">
-                {dates.map((d) => (
+            {/* Date Selection */}
+            <div className="space-y-2">
+              <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Select Date</label>
+              <div className="flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
+                {dates.map(d => (
                   <button
                     key={d}
                     onClick={() => setBookingDate(d)}
-                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                    className={`px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all flex-shrink-0 ${
                       bookingDate === d 
                         ? 'bg-teal-600 text-white shadow-sm' 
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -184,14 +166,15 @@ export default function ConsultationsView({
               </div>
             </div>
 
-            <div>
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Select Time</label>
-              <div className="flex flex-wrap gap-2">
-                {times.map((t) => (
+            {/* Time Slot Selection */}
+            <div className="space-y-2">
+              <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Select Time Slot</label>
+              <div className="grid grid-cols-2 gap-2">
+                {times.map(t => (
                   <button
                     key={t}
                     onClick={() => setBookingTime(t)}
-                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                    className={`py-2 rounded-xl text-xs font-bold transition-all ${
                       bookingTime === t 
                         ? 'bg-teal-600 text-white shadow-sm' 
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -203,16 +186,17 @@ export default function ConsultationsView({
               </div>
             </div>
 
-            <div>
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Format</label>
-              <div className="flex flex-wrap gap-2">
-                {formats.map((f) => (
+            {/* Format Selection */}
+            <div className="space-y-2">
+              <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Session Format</label>
+              <div className="grid grid-cols-2 gap-2">
+                {['Video call', 'In-person'].map(f => (
                   <button
                     key={f}
                     onClick={() => setSessionFormat(f)}
-                    className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+                    className={`py-2 rounded-xl text-xs font-bold transition-all ${
                       sessionFormat === f 
-                        ? 'bg-teal-600 text-white shadow-sm' 
+                        ? 'bg-teal-700 text-white shadow-sm' 
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                     }`}
                   >
@@ -222,158 +206,200 @@ export default function ConsultationsView({
               </div>
             </div>
 
-            <div>
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Duration</label>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setSessionDuration(30)}
-                  className={`flex-1 py-2.5 rounded-xl font-bold text-sm border transition-all ${
-                    sessionDuration === 30 ? 'border-teal-600 bg-teal-50 text-teal-800' : 'border-slate-200 text-slate-600'
-                  }`}
-                >
-                  30 Mins (${Math.round(basePrice * 0.6)})
-                </button>
-                <button
-                  onClick={() => setSessionDuration(60)}
-                  className={`flex-1 py-2.5 rounded-xl font-bold text-sm border transition-all ${
-                    sessionDuration === 60 ? 'border-teal-600 bg-teal-50 text-teal-800' : 'border-slate-200 text-slate-600'
-                  }`}
-                >
-                  60 Mins (${basePrice})
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Col: Checkout & Payment Confirmation */}
-        <div className="space-y-6">
-          <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-md space-y-6 sticky top-28">
-            <h3 className="text-lg font-bold text-slate-800 border-b border-slate-100 pb-3">Session Summary</h3>
-
-            <div className="space-y-3 text-sm">
-              <div className="flex justify-between text-slate-600">
-                <span>Therapist:</span>
-                <span className="font-bold text-slate-800">{selectedConsultant.name}</span>
-              </div>
-              <div className="flex justify-between text-slate-600">
-                <span>Date & Time:</span>
-                <span className="font-bold text-slate-800">{bookingDate}, {bookingTime}</span>
-              </div>
-              <div className="flex justify-between text-slate-600">
-                <span>Duration & Format:</span>
-                <span className="font-bold text-slate-800">{sessionDuration} mins ({sessionFormat})</span>
-              </div>
-            </div>
-
             {/* Promo Code Input */}
-            <div className="pt-2 border-t border-slate-100">
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">Coupon Promo Code</label>
+            <div className="space-y-2 pt-2 border-t border-slate-100">
+              <label className="text-xs font-extrabold uppercase tracking-wider text-slate-500">Promo Code</label>
               <div className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="e.g. MINDCARE10"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
-                  className="flex-1 px-3 py-2 border border-slate-200 rounded-xl text-sm outline-none focus:border-teal-600 uppercase"
+                  placeholder="Try MINDCARE10"
+                  className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:outline-none focus:border-teal-600 uppercase"
                 />
                 <button
-                  type="button"
                   onClick={handleApplyPromo}
-                  className="bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-900"
+                  className="bg-slate-800 text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-900 transition-colors"
                 >
                   Apply
                 </button>
               </div>
-              {promoError && <p className="text-xs text-red-500 mt-1">{promoError}</p>}
-              {discountPercent > 0 && <p className="text-xs text-emerald-600 font-bold mt-1">10% Promo Discount Applied!</p>}
+              {discountPercent > 0 && (
+                <p className="text-xs text-emerald-600 font-bold flex items-center gap-1">
+                  <span className="material-symbols-outlined text-sm">check_circle</span>
+                  10% Coupon Applied!
+                </p>
+              )}
+              {promoError && (
+                <p className="text-xs text-rose-600 font-bold">{promoError}</p>
+              )}
             </div>
 
-            <div className="border-t border-slate-100 pt-4 flex justify-between items-center">
-              <span className="font-bold text-slate-800">Total Investment:</span>
-              <span className="text-2xl font-black text-teal-700">${finalCost}</span>
+            {/* Price Total */}
+            <div className="pt-3 border-t border-slate-100 flex justify-between items-center">
+              <span className="text-sm font-bold text-slate-600">Total Due:</span>
+              <span className="text-2xl font-black text-slate-900">${finalPrice}</span>
             </div>
 
+            {/* Payment Checkout Form / Confirm */}
             {!paymentSuccess ? (
-              <form onSubmit={handlePayConfirm} className="space-y-4 pt-2 border-t border-slate-100">
-                <h4 className="font-bold text-slate-800 text-sm">Payment Details</h4>
+              <form onSubmit={handlePayConfirm} className="space-y-3 pt-2">
                 <div>
                   <input
                     type="text"
                     placeholder="Cardholder Name"
                     value={paymentCard.name}
                     onChange={(e) => setPaymentCard({ ...paymentCard, name: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl outline-none focus:border-teal-600"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:border-teal-600 outline-none"
                   />
-                  {paymentErrors.name && <p className="text-[10px] text-red-500 mt-0.5">{paymentErrors.name}</p>}
+                  {paymentErrors.name && <p className="text-[10px] text-rose-600 font-bold mt-0.5">{paymentErrors.name}</p>}
                 </div>
 
                 <div>
                   <input
                     type="text"
-                    placeholder="Card Number (16 digits)"
-                    maxLength={16}
+                    placeholder="Card Number (16 Digits)"
                     value={paymentCard.number}
                     onChange={(e) => setPaymentCard({ ...paymentCard, number: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl outline-none focus:border-teal-600"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:border-teal-600 outline-none"
                   />
-                  {paymentErrors.number && <p className="text-[10px] text-red-500 mt-0.5">{paymentErrors.number}</p>}
+                  {paymentErrors.number && <p className="text-[10px] text-rose-600 font-bold mt-0.5">{paymentErrors.number}</p>}
                 </div>
 
-                <div className="flex gap-3">
-                  <div className="flex-1">
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
                     <input
                       type="text"
                       placeholder="MM/YY"
-                      maxLength={5}
                       value={paymentCard.expiry}
                       onChange={(e) => setPaymentCard({ ...paymentCard, expiry: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl outline-none focus:border-teal-600"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:border-teal-600 outline-none"
                     />
-                    {paymentErrors.expiry && <p className="text-[10px] text-red-500 mt-0.5">{paymentErrors.expiry}</p>}
+                    {paymentErrors.expiry && <p className="text-[10px] text-rose-600 font-bold mt-0.5">{paymentErrors.expiry}</p>}
                   </div>
-                  <div className="flex-1">
+                  <div>
                     <input
-                      type="text"
+                      type="password"
                       placeholder="CVV"
-                      maxLength={4}
                       value={paymentCard.cvv}
                       onChange={(e) => setPaymentCard({ ...paymentCard, cvv: e.target.value })}
-                      className="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl outline-none focus:border-teal-600"
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold focus:border-teal-600 outline-none"
                     />
-                    {paymentErrors.cvv && <p className="text-[10px] text-red-500 mt-0.5">{paymentErrors.cvv}</p>}
+                    {paymentErrors.cvv && <p className="text-[10px] text-rose-600 font-bold mt-0.5">{paymentErrors.cvv}</p>}
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-teal-600 text-white py-3 rounded-full font-bold hover:bg-teal-700 transition-colors shadow-md shadow-teal-600/20 text-sm flex items-center justify-center gap-2"
+                  className="w-full gradient-btn text-white py-3.5 rounded-2xl font-bold text-sm shadow-md shadow-teal-500/20 mt-2"
                 >
-                  <span className="material-symbols-outlined text-lg">lock</span>
-                  Pay ${finalCost} & Confirm Session
+                  Confirm & Pay ${finalPrice}
                 </button>
               </form>
             ) : (
-              <div className="space-y-4 text-center pt-2 animate-fade-in">
-                <div className="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
-                  <span className="material-symbols-outlined text-2xl">check_circle</span>
-                </div>
-                <h4 className="font-bold text-slate-800 text-base">Booking Confirmed!</h4>
-                <p className="text-xs text-slate-500">
-                  Your appointment is saved to Python SQLite Database.
-                </p>
+              <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-center space-y-3 animate-slide-up-fade">
+                <span className="material-symbols-outlined text-3xl text-emerald-600">check_circle</span>
+                <p className="font-extrabold text-emerald-900 text-sm">Session Booked Successfully!</p>
+                <p className="text-xs text-emerald-700">Confirmation sent to your email & recorded in your milestones trajectory.</p>
                 <button
-                  onClick={() => setShowVideoCall(true)}
-                  className="w-full bg-emerald-600 text-white py-3 rounded-full font-bold hover:bg-emerald-700 transition-colors text-sm flex items-center justify-center gap-2 shadow-md"
+                  onClick={() => {
+                    setPaymentSuccess(false);
+                    setPaymentCard({ number: '', expiry: '', cvv: '', name: '' });
+                  }}
+                  className="w-full bg-emerald-600 text-white py-2 rounded-xl text-xs font-bold hover:bg-emerald-700 transition-colors shadow-sm"
                 >
-                  <span className="material-symbols-outlined text-lg">videocam</span>
-                  Launch Demo Video Call
+                  Book Another Session
                 </button>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      {/* Mock Video Call Modal */}
+      {showVideoCall && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-slide-up-fade">
+          <div className="bg-slate-900 text-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl border border-slate-800 space-y-6 relative overflow-hidden">
+            {/* Header info */}
+            <div className="flex justify-between items-center border-b border-slate-800 pb-4">
+              <div className="flex items-center gap-3">
+                <span className="w-3 h-3 rounded-full bg-rose-500 animate-pulse"></span>
+                <div>
+                  <h4 className="font-bold text-sm">Active Session with Dr. Ananya Sharma</h4>
+                  <p className="text-xs text-slate-400">Encrypted HD Video Connection</p>
+                </div>
+              </div>
+              <span className="bg-slate-800 px-3 py-1 rounded-full text-xs font-mono font-bold text-teal-400">
+                {videoCallDuration}
+              </span>
+            </div>
+
+            {/* Video Viewport Mock */}
+            <div className="relative h-72 sm:h-96 bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 flex items-center justify-center">
+              <img 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtD0k7joFXApSUN5fqx1TQFqH_ELVGT8Ix_pL2oDRqbL1Lu68ExijA9UMnNxBx-POwkniXBNJM-GOsLmTsIZ49ClMgUPOquiAxjG0WlZF4_ZG_ysh01gIS9GmYARN85fLlZpa573opUQkAWp4aLgyycabwLJMAL4wR9PP59lZcypYVd6D2uKnwtzduXVviGuhkuyDEDBfVwVFFpckzjMFsLe3JAh_MlpOX4Joz_-53LyM3COQvSimi7Q" 
+                alt="Therapist Video"
+                className="w-full h-full object-cover opacity-90"
+              />
+              <div className="absolute bottom-4 left-4 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-700">
+                Dr. Ananya Sharma (Clinical Psychologist)
+              </div>
+              
+              {/* User PiP */}
+              <div className="absolute top-4 right-4 w-28 h-36 bg-slate-800 rounded-xl overflow-hidden border-2 border-slate-700 shadow-lg relative">
+                {!isCamOff ? (
+                  <img 
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT4_acYkpaqwuyRb0zbDwjmnnic1Zy-rL6Ktz7kbVXyjk7Sfv9u8H0OGcG9O3W3ip0wdVz9wuCn7p9HPoUi-O2IJ_D6gBtBH-hsyq-tAhAE_GvNgTIAUeW3f4k0N2CxuVPL9obWitxKzUvApZ1uNNUwcmzxkLX4dsDH1L21gpQdO6Q1F5w0g6YFm6Z0biO6cMbM34Oo4P3m6PMvfFViPqBnbojDeBMNA8TsnErpaaYH8i1eFbNre8UEA" 
+                    alt="You" 
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-slate-900 text-slate-500">
+                    <span className="material-symbols-outlined text-3xl">videocam_off</span>
+                  </div>
+                )}
+                {isMicMuted && (
+                  <span className="absolute bottom-1 right-1 bg-rose-600 text-white p-1 rounded-full text-xs">
+                    <span className="material-symbols-outlined text-xs">mic_off</span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Video Controls */}
+            <div className="flex justify-center items-center gap-4 pt-2">
+              <button 
+                onClick={() => setIsMicMuted(!isMicMuted)}
+                className={`p-3.5 rounded-full text-white transition-all ${
+                  isMicMuted ? 'bg-rose-600 hover:bg-rose-700 shadow-lg shadow-rose-600/30' : 'bg-slate-800 hover:bg-slate-700'
+                }`}
+                title={isMicMuted ? 'Unmute Microphone' : 'Mute Microphone'}
+              >
+                <span className="material-symbols-outlined">{isMicMuted ? 'mic_off' : 'mic'}</span>
+              </button>
+
+              <button 
+                onClick={() => setIsCamOff(!isCamOff)}
+                className={`p-3.5 rounded-full text-white transition-all ${
+                  isCamOff ? 'bg-rose-600 hover:bg-rose-700 shadow-lg shadow-rose-600/30' : 'bg-slate-800 hover:bg-slate-700'
+                }`}
+                title={isCamOff ? 'Turn On Camera' : 'Turn Off Camera'}
+              >
+                <span className="material-symbols-outlined">{isCamOff ? 'videocam_off' : 'videocam'}</span>
+              </button>
+
+              <button 
+                onClick={() => setShowVideoCall(false)}
+                className="p-3.5 bg-rose-600 hover:bg-rose-700 rounded-full text-white transition-colors shadow-lg shadow-rose-600/30"
+                title="End Video Call"
+              >
+                <span className="material-symbols-outlined">call_end</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
